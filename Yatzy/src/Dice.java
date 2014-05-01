@@ -1,5 +1,5 @@
 public class Dice {
  
 	foo foo = foo;
-	derp; // please work again
+	derp; // please work again AND AGAIN
 }
