@@ -1,3 +1,5 @@
+package yatzy;
+
 public class Dice {
  
 	public boolean locked;
