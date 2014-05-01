@@ -1,6 +1,5 @@
-
 public class Dice {
  
 	foo foo = foo;
-	derp;
+	derp; //l2p
 }
