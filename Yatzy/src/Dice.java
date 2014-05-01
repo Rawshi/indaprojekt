@@ -1,5 +1,9 @@
 public class Dice {
  
-	foo foo = foo;
-	derp; // please work again AND AGAIN
+	public boolean locked;
+	public int diceFace;
+	
+	public void roll(){
+		diceFace = (int)(6.0 * Math.random()) +1;
+	}
 }
