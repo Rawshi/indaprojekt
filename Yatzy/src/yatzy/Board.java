@@ -1,3 +1,4 @@
+package yatzy;
 /**
  * Class Board - Creates the window that the game is played in.
  * Also adds buttons to it, etc.

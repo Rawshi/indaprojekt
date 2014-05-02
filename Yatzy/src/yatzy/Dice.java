@@ -1,3 +1,5 @@
+package yatzy;
+
 import java.util.Random;
 
 /**
@@ -12,15 +14,19 @@ public class Dice {
 	private boolean locked;
 	private Random randomGen;
 	private int sideUp;
+	private int x;
+	private int y;
 	
 	/**
 	 * Constructor for Dice
 	 */
-	public Dice() {
+	public Dice(int x, int y) {
 		locked = false;
 		randomGen = new Random();
 		sideUp = 1;
 		drawDice(sideUp, locked);
+		this.x = x;
+		this.y = y;
 	}
 	
 	/**

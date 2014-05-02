@@ -1,3 +1,4 @@
+package yatzy;
 /**
  * Class Play - This is the class containing the main method.
  * It starts a game of Yatzy.

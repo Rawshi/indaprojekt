@@ -1,3 +1,4 @@
+package yatzy;
 /**
  * Class Scoresheet - Constructs the score sheet, etc.
  * 
