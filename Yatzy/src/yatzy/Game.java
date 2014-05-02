@@ -29,7 +29,7 @@ public class Game {
       gameField.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       gameField.setSize(500,500);
       gameField.add(gameBackround);
-      gameBackround.add(new GameButton());
+      gameBackround.add(new JButton("test"));
       gameField.setVisible(true);
       
   }
@@ -39,10 +39,5 @@ class GamePanel extends JPanel {
 	
 	public GamePanel() {
         setBorder(BorderFactory.createLineBorder(Color.red));
-	}
-}
-
-class GameButton extends JButton {
-	public GameButton() {
 	}
 }
