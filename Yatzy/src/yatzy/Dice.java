@@ -9,14 +9,14 @@ import java.util.Random;
  * @version 1.0
  */
 public class Dice {
- 
+
 	private static final int SIDES = 6;
 	private boolean locked;
 	private Random randomGen;
 	private int sideUp;
 	private int x;
 	private int y;
-	
+
 	/**
 	 * Constructor for Dice
 	 */
@@ -28,14 +28,14 @@ public class Dice {
 		this.x = x;
 		this.y = y;
 	}
-	
+
 	/**
 	 * Draws the dice
 	 */
 	public void drawDice(int side, boolean locked) {
-		
+
 	}
-	
+
 	/**
 	 * Rolls the dice
 	 */
@@ -46,7 +46,7 @@ public class Dice {
 			drawDice(sideUp, locked);
 		}
 	}
-	
+
 	/**
 	 * Locks the dice
 	 */
@@ -54,7 +54,7 @@ public class Dice {
 		locked = true;
 		drawDice(sideUp, locked);
 	}
-	
+
 	/**
 	 * Unlocks the dice
 	 */
