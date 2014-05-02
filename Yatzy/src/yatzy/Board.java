@@ -8,5 +8,5 @@ package yatzy;
  */
 public class Board {
 
-	// blabla
+	// blabl
 }
