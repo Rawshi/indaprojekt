@@ -57,6 +57,14 @@ public class Game {
 				startMenu.setVisible(false);
 				}
 			});
+			
+            twoPlayer.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+				startMenu.setVisible(false);
+				}
+			});
 		}
 	}
 }
