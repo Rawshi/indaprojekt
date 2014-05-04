@@ -3,6 +3,8 @@ package yatzy;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -39,7 +41,7 @@ public class Game {
 		public GamePanel() {
 			setBorder(BorderFactory.createLineBorder(Color.red));
 			setLayout(new BorderLayout());
-			JPanel startMenu = new JPanel(new GridLayout(4,1));
+			final JPanel startMenu = new JPanel(new GridLayout(4,1));
 			
 			JButton onePlayer = new JButton("One Player");
 			JButton twoPlayer = new JButton("Two Players");
@@ -47,6 +49,14 @@ public class Game {
 			add(startMenu, BorderLayout.WEST);
 			startMenu.add(onePlayer, BorderLayout.WEST);
 			startMenu.add(twoPlayer, BorderLayout.WEST);
+			
+			onePlayer.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+				startMenu.setVisible(false);
+				}
+			});
 		}
 	}
 }
