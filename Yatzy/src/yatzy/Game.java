@@ -32,7 +32,7 @@ public class Game {
 		gameField.setSize(850,600);
 		gameField.add(gameBackround);
 		gameBackround.setLayout(new BorderLayout());
-		JPanel startMenu = new JPanel(new GridLayout(2,2));
+		JPanel startMenu = new JPanel(new GridLayout(4,1));
 		JButton onePlayer = new JButton("Tryck på mig ples");
 		JButton twoPlayer = new JButton("Tryck på mig kanske?");
 		gameBackround.add(startMenu, BorderLayout.WEST);
