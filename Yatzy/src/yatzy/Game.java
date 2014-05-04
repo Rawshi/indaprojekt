@@ -3,6 +3,7 @@ package yatzy;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -31,10 +32,11 @@ public class Game {
 		gameField.setSize(850,600);
 		gameField.add(gameBackround);
 		gameBackround.setLayout(new BorderLayout());
+		JPanel startMenu = new JPanel(new GridLayout(1,4));
 		JButton onePlayer = new JButton("Tryck på mig ples");
 		JButton twoPlayer = new JButton("Tryck på mig kanske?");
 		gameBackround.add(onePlayer, BorderLayout.WEST);
-		gameBackround.add(twoPlayer, BorderLayout.WEST);
+		gameBackround.add(twoPlayer, BorderLayout.EAST);
 		gameField.setVisible(true);
 
 	}
