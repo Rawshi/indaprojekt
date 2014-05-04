@@ -32,11 +32,12 @@ public class Game {
 		gameField.setSize(850,600);
 		gameField.add(gameBackround);
 		gameBackround.setLayout(new BorderLayout());
-		JPanel startMenu = new JPanel(new GridLayout(1,4));
+		JPanel startMenu = new JPanel(new GridLayout(2,2));
 		JButton onePlayer = new JButton("Tryck på mig ples");
 		JButton twoPlayer = new JButton("Tryck på mig kanske?");
-		gameBackround.add(onePlayer, BorderLayout.WEST);
-		gameBackround.add(twoPlayer, BorderLayout.EAST);
+		gameBackround.add(startMenu, BorderLayout.WEST);
+		startMenu.add(onePlayer, BorderLayout.WEST);
+		startMenu.add(twoPlayer, BorderLayout.WEST);
 		gameField.setVisible(true);
 
 	}
