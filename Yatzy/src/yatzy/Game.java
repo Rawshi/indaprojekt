@@ -35,6 +35,10 @@ public class Game {
 
 	}
 	
+	private static void play(int players) {
+	   System.out.println("dix");
+	}
+	
 	
 	static class GamePanel extends JPanel {
 
@@ -55,6 +59,7 @@ public class Game {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 				startMenu.setVisible(false);
+				play(1);
 				}
 			});
 			
@@ -63,6 +68,7 @@ public class Game {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 				startMenu.setVisible(false);
+				play(2);
 				}
 			});
 		}
