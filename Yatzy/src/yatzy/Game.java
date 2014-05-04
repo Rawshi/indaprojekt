@@ -1,7 +1,9 @@
 package yatzy;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -28,7 +30,11 @@ public class Game {
 		gameField.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		gameField.setSize(850,600);
 		gameField.add(gameBackround);
-		gameBackround.add(new JButton("Tryck på mig ples"));
+		gameBackround.setLayout(new BorderLayout());
+		JButton onePlayer = new JButton("Tryck på mig ples");
+		JButton twoPlayer = new JButton("Tryck på mig kanske?");
+		gameBackround.add(onePlayer, BorderLayout.WEST);
+		gameBackround.add(twoPlayer, BorderLayout.WEST);
 		gameField.setVisible(true);
 
 	}
