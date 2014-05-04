@@ -58,7 +58,7 @@ public class Game {
 				}
 			});
 			
-            twoPlayer.addActionListener(new ActionListener() {
+             twoPlayer.addActionListener(new ActionListener() {
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
