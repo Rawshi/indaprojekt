@@ -51,8 +51,8 @@ public class Game {
 			JButton twoPlayer = new JButton("Two Players");
 			
 			add(startMenu, BorderLayout.WEST);
-			startMenu.add(onePlayer, BorderLayout.WEST);
-			startMenu.add(twoPlayer, BorderLayout.WEST);
+			startMenu.add(onePlayer);
+			startMenu.add(twoPlayer);
 			
 			onePlayer.addActionListener(new ActionListener() {
 				
