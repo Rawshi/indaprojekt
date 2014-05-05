@@ -43,7 +43,7 @@ public class Game {
 	static class GamePanel extends JPanel {
 
 		public GamePanel() {
-			setBorder(BorderFactory.createLineBorder(Color.red));
+			setBorder(BorderFactory.createLineBorder(Color.magenta));
 			setLayout(new BorderLayout());
 			final JPanel startMenu = new JPanel(new GridLayout(4,1));
 			
