@@ -30,7 +30,7 @@ public class Scoresheet {
 	/**
 	 * Checks the values of the dices to figure out where it is allowed to put the score.
 	 */
-	public void checkDices() {
+	public void clickScore() {
 		
 	}
 }
