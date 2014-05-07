@@ -46,19 +46,19 @@ public class Dice {
 	/**
 	 * Draws the dice
 	 */
-	public JToggleButton addDice(final int side) {
+	public JToggleButton addDice() {
 		final JToggleButton dice = new JToggleButton();
-		dice.setIcon(diceImage[side]);
+		dice.setIcon(diceImage[1]);
 		Border emptyBorder = BorderFactory.createEmptyBorder();
     	dice.setBorder(emptyBorder);
 		dice.addItemListener(new ItemListener() {
 			   public void itemStateChanged(ItemEvent ev) {
 			      if(ev.getStateChange()==ItemEvent.SELECTED){
 			    	lock();
-			        dice.setIcon(diceLockedImage[side]);
+			        dice.setIcon(diceLockedImage[sideUp]);
 			      } else if(ev.getStateChange()==ItemEvent.DESELECTED){
 			    	unlock();
-			        dice.setIcon(diceImage[side]);
+			        dice.setIcon(diceImage[sideUp]);
 			      }
 			   }
 		 });

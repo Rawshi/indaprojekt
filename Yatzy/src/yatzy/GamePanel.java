@@ -13,16 +13,25 @@ import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 import javax.swing.border.Border;
  
+/**
+ * A Backround panel where every 
+ * @author Mig
+ *
+ */
 public class GamePanel extends JPanel {
 	public GamePanel() {
      setBorder(BorderFactory.createLineBorder(Color.black));
 	 GridBagConstraints c = new GridBagConstraints();	
-	 Dice dice1 = new Dice();
-	 Dice dice2 = new Dice();
+	 Dice[] dices = new Dice[6];
 	 
-	 add(dice1.addDice(1));
-	 add(dice2.addDice(2));
+	 for(int i = 0; i < 6; i++){
+     dices[i] = new Dice();
+	 add(dices[i].addDice());
+	 }
+	 
 	}
+	
+	
 	/**
 	 * Kommer antagligen inte att behövas.
 	 */
