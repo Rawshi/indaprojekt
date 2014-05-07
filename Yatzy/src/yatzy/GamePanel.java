@@ -1,7 +1,6 @@
 package yatzy;
 
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -12,6 +11,7 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
+import javax.swing.border.Border;
  
 public class GamePanel extends JPanel {
 	public GamePanel() {
@@ -27,6 +27,8 @@ public class GamePanel extends JPanel {
 	public void addDice(final ImageIcon icon, final ImageIcon icon2){
 		final JToggleButton dice = new JToggleButton();
 		dice.setIcon(icon);
+		Border emptyBorder = BorderFactory.createEmptyBorder();
+		dice.setBorder(emptyBorder);
 		dice.addItemListener(new ItemListener() {
 			   public void itemStateChanged(ItemEvent ev) {
 			      if(ev.getStateChange()==ItemEvent.SELECTED){
