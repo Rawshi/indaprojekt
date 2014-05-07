@@ -77,8 +77,7 @@ public class Game {
 		    Image dice3 = Toolkit.getDefaultToolkit().getImage("resources/dice_1.jpg");
 		    Image dice4 = Toolkit.getDefaultToolkit().getImage("resources/dice_1.jpg");
 		    Image dice5 = Toolkit.getDefaultToolkit().getImage("resources/dice_1.jpg");
-			g.setColor(Color.white);
-			g.fillRect(10,10,50,50);
+		    
 			g.drawImage(dice1, 150, 10, this);
 			g.drawImage(dice2, 150, 120, this);
 			g.drawImage(dice3, 150, 230, this);
