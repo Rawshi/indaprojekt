@@ -6,6 +6,8 @@ import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -33,7 +35,7 @@ public class Game {
 		JFrame gameField = new JFrame("Yatzy");
 		JPanel gameBorder = new JPanel();
 	    JPanel gameBorder2 = new JPanel();
-	    Game.GamePanel gameBackground = new Game.GamePanel();
+	    GamePanel gameBackground = new GamePanel();
 	    
 		gameField.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		gameField.setSize(850,600);
@@ -56,43 +58,4 @@ public class Game {
 		
 	}
 
-
-	static class GamePanel extends JPanel {
-		public GamePanel() {
-			setBorder(BorderFactory.createLineBorder(Color.black));
-		 GridBagConstraints c = new GridBagConstraints();	
-		 Image image= Toolkit.getDefaultToolkit().getImage("resources/dice_1.jpg");
-		 ImageIcon icon = new ImageIcon(image);
-		 
-		 
-		 JToggleButton dice1 = new JToggleButton();
-		 JToggleButton dice2 = new JToggleButton();
-		 JToggleButton dice3 = new JToggleButton();
-		 JToggleButton dice4 = new JToggleButton();
-		 JToggleButton dice5 = new JToggleButton();
-	
-		 dice1.setIcon(icon);
-		 dice2.setIcon(icon);
-		 dice3.setIcon(icon);
-		 dice4.setIcon(icon);
-		 dice5.setIcon(icon);
-		 
-		 add(dice1);
-		 add(dice2);
-		 add(dice3);
-		 add(dice4);
-		 add(dice5);
-		 
-		}
-		@Override
-		public void paintComponent(Graphics g){
-			super.paintComponent(g);
-
-		   // Image dice1 = Toolkit.getDefaultToolkit().getImage("resources/dice_1.jpg");
-		    
-			// g.drawImage(dice1, 150, 10, this);
-
-
-		}
-	}
 }
