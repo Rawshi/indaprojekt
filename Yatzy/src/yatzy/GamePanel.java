@@ -30,7 +30,7 @@ public class GamePanel extends JPanel {
 		final JToggleButton dice = new JToggleButton();
 		dice.setIcon(icon);
 		Border emptyBorder = BorderFactory.createEmptyBorder();
-		dice.setBorder(emptyBorder);
+    	dice.setBorder(emptyBorder);
 		dice.addItemListener(new ItemListener() {
 			   public void itemStateChanged(ItemEvent ev) {
 			      if(ev.getStateChange()==ItemEvent.SELECTED){
