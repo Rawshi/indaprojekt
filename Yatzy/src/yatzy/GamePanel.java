@@ -17,12 +17,14 @@ public class GamePanel extends JPanel {
 	public GamePanel() {
      setBorder(BorderFactory.createLineBorder(Color.black));
 	 GridBagConstraints c = new GridBagConstraints();	
-	 Image image= Toolkit.getDefaultToolkit().getImage("resources/dice_1.jpg");
-	 ImageIcon icon = new ImageIcon(image);
-	 image =  Toolkit.getDefaultToolkit().getImage("resources/dice_2.jpg");
-	 ImageIcon icon2 = new ImageIcon(image);
-	 addDice(icon, icon2);
-	 addDice(icon2, icon);
+	 ImageIcon[] diceImages = new ImageIcon[6];
+	 for (int i = 0; i< 6; i++){
+			Image image= Toolkit.getDefaultToolkit().getImage("resources/dice_"+i+".jpg");
+			diceImages[i] = new ImageIcon(image);
+			}
+	 
+	 addDice(diceImages[1], diceImages[2]);
+	 addDice(diceImages[2], diceImages[3]);
 	}
 	public void addDice(final ImageIcon icon, final ImageIcon icon2){
 		final JToggleButton dice = new JToggleButton();

@@ -1,6 +1,10 @@
 package yatzy;
 
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.util.Random;
+
+import javax.swing.ImageIcon;
 
 /**
  * Class Dice - Constructs a dice
@@ -16,6 +20,7 @@ public class Dice {
 	private int sideUp;
 	private int x;
 	private int y;
+
 
 	/**
 	 * Constructor for Dice
