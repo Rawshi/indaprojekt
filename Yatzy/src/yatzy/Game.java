@@ -9,10 +9,10 @@ import java.awt.Toolkit;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JToggleButton;
 import javax.swing.SwingUtilities;
 
 public class Game {
@@ -62,10 +62,27 @@ public class Game {
 			setBorder(BorderFactory.createLineBorder(Color.black));
 		 GridBagConstraints c = new GridBagConstraints();	
 		 Image image= Toolkit.getDefaultToolkit().getImage("resources/dice_1.jpg");
-		 ImageIcon icon = new ImageIcon(image); 
-		 JButton dice = new JButton();
-		 dice.setIcon(icon);
-		 add(dice);
+		 ImageIcon icon = new ImageIcon(image);
+		 
+		 
+		 JToggleButton dice1 = new JToggleButton();
+		 JToggleButton dice2 = new JToggleButton();
+		 JToggleButton dice3 = new JToggleButton();
+		 JToggleButton dice4 = new JToggleButton();
+		 JToggleButton dice5 = new JToggleButton();
+	
+		 dice1.setIcon(icon);
+		 dice2.setIcon(icon);
+		 dice3.setIcon(icon);
+		 dice4.setIcon(icon);
+		 dice5.setIcon(icon);
+		 
+		 add(dice1);
+		 add(dice2);
+		 add(dice3);
+		 add(dice4);
+		 add(dice5);
+		 
 		}
 		@Override
 		public void paintComponent(Graphics g){
