@@ -22,16 +22,17 @@ public class GamePanel extends JPanel {
 	 image =  Toolkit.getDefaultToolkit().getImage("resources/dice_2.jpg");
 	 ImageIcon icon2 = new ImageIcon(image);
 	 addDice(icon, icon2);
+	 addDice(icon2, icon);
 	}
-	public void addDice(ImageIcon icon, ImageIcon icon2){
-		JToggleButton dice = new JToggleButton();
+	public void addDice(final ImageIcon icon, final ImageIcon icon2){
+		final JToggleButton dice = new JToggleButton();
 		dice.setIcon(icon);
 		dice.addItemListener(new ItemListener() {
 			   public void itemStateChanged(ItemEvent ev) {
 			      if(ev.getStateChange()==ItemEvent.SELECTED){
-			        System.out.println("no rawr");
+			        dice.setIcon(icon2);
 			      } else if(ev.getStateChange()==ItemEvent.DESELECTED){
-			        System.out.println("rawr");
+			        dice.setIcon(icon);
 			      }
 			   }
 		 });
