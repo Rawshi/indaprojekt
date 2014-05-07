@@ -3,19 +3,12 @@ package yatzy;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.GridLayout;
+import java.awt.GridBagConstraints;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -33,6 +26,7 @@ public class Game {
 		});
 
 	}
+	
 
 	private static void createGameGUI(){
 		JOptionPane.showInputDialog("Derp");
@@ -65,24 +59,21 @@ public class Game {
 
 	static class GamePanel extends JPanel {
 		public GamePanel() {
-			setBorder(BorderFactory.createLineBorder(Color.white));
-		    
+			setBorder(BorderFactory.createLineBorder(Color.black));
+		 GridBagConstraints c = new GridBagConstraints();	
+		 Image image= Toolkit.getDefaultToolkit().getImage("resources/dice_1.jpg");
+		 ImageIcon icon = new ImageIcon(image); 
+		 JButton dice = new JButton();
+		 dice.setIcon(icon);
+		 add(dice);
 		}
 		@Override
 		public void paintComponent(Graphics g){
 			super.paintComponent(g);
 
-		    Image dice1 = Toolkit.getDefaultToolkit().getImage("resources/dice_1.jpg");
-		    Image dice2 = Toolkit.getDefaultToolkit().getImage("resources/dice_1.jpg");
-		    Image dice3 = Toolkit.getDefaultToolkit().getImage("resources/dice_1.jpg");
-		    Image dice4 = Toolkit.getDefaultToolkit().getImage("resources/dice_1.jpg");
-		    Image dice5 = Toolkit.getDefaultToolkit().getImage("resources/dice_1.jpg");
+		   // Image dice1 = Toolkit.getDefaultToolkit().getImage("resources/dice_1.jpg");
 		    
-			g.drawImage(dice1, 150, 10, this);
-			g.drawImage(dice2, 150, 120, this);
-			g.drawImage(dice3, 150, 230, this);
-			g.drawImage(dice4, 150, 340, this);
-			g.drawImage(dice5, 150, 450, this);
+			// g.drawImage(dice1, 150, 10, this);
 
 
 		}
