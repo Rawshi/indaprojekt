@@ -17,30 +17,11 @@ public class GamePanel extends JPanel {
 	public GamePanel() {
      setBorder(BorderFactory.createLineBorder(Color.black));
 	 GridBagConstraints c = new GridBagConstraints();	
-	 ImageIcon[] diceImages = new ImageIcon[6];
-	 for (int i = 0; i< 6; i++){
-			Image image= Toolkit.getDefaultToolkit().getImage("resources/dice_"+i+".jpg");
-			diceImages[i] = new ImageIcon(image);
-			}
+	 Dice dice1 = new Dice();
+	 Dice dice2 = new Dice();
 	 
-	 addDice(diceImages[1], diceImages[2]);
-	 addDice(diceImages[2], diceImages[3]);
-	}
-	public void addDice(final ImageIcon icon, final ImageIcon icon2){
-		final JToggleButton dice = new JToggleButton();
-		dice.setIcon(icon);
-		Border emptyBorder = BorderFactory.createEmptyBorder();
-    	dice.setBorder(emptyBorder);
-		dice.addItemListener(new ItemListener() {
-			   public void itemStateChanged(ItemEvent ev) {
-			      if(ev.getStateChange()==ItemEvent.SELECTED){
-			        dice.setIcon(icon2);
-			      } else if(ev.getStateChange()==ItemEvent.DESELECTED){
-			        dice.setIcon(icon);
-			      }
-			   }
-		 });
-		 add(dice);
+	 add(dice1.addDice(1));
+	 add(dice2.addDice(2));
 	}
 	/**
 	 * Kommer antagligen inte att behövas.

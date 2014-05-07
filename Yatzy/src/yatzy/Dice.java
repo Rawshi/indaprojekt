@@ -2,9 +2,14 @@ package yatzy;
 
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.Random;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JToggleButton;
+import javax.swing.border.Border;
 
 /**
  * Class Dice - Constructs a dice
@@ -18,27 +23,46 @@ public class Dice {
 	private boolean locked;
 	private Random randomGen;
 	private int sideUp;
-	private int x;
-	private int y;
+	 ImageIcon[] diceImage = new ImageIcon[6];
+	 ImageIcon[] diceLockedImage = new ImageIcon[6];
 
 
 	/**
 	 * Constructor for Dice
 	 */
-	public Dice(int x, int y) {
+	public Dice() {
 		locked = false;
 		randomGen = new Random();
 		sideUp = 1;
-		drawDice(sideUp, locked);
-		this.x = x;
-		this.y = y;
+		for (int i = 0; i< 6; i++){
+			Image image= Toolkit.getDefaultToolkit().getImage("resources/dice_"+i+".jpg");
+			diceImage[i] = new ImageIcon(image);
+			// PlaceHolder för nya bilder
+			image= Toolkit.getDefaultToolkit().getImage("resources/dice_"+ (6-i) +".jpg");
+			diceLockedImage[i] = new ImageIcon(image);
+			}
 	}
 
 	/**
 	 * Draws the dice
 	 */
-	public void drawDice(int side, boolean locked) {
-
+	public JToggleButton addDice(final int side) {
+		final JToggleButton dice = new JToggleButton();
+		dice.setIcon(diceImage[side]);
+		Border emptyBorder = BorderFactory.createEmptyBorder();
+    	dice.setBorder(emptyBorder);
+		dice.addItemListener(new ItemListener() {
+			   public void itemStateChanged(ItemEvent ev) {
+			      if(ev.getStateChange()==ItemEvent.SELECTED){
+			    	lock();
+			        dice.setIcon(diceLockedImage[side]);
+			      } else if(ev.getStateChange()==ItemEvent.DESELECTED){
+			    	unlock();
+			        dice.setIcon(diceImage[side]);
+			      }
+			   }
+		 });
+		return dice;
 	}
 
 	/**
@@ -48,7 +72,6 @@ public class Dice {
 		if(!locked) {
 			//roll
 			sideUp = randomGen.nextInt(SIDES)+1;
-			drawDice(sideUp, locked);
 		}
 	}
 
@@ -57,7 +80,6 @@ public class Dice {
 	 */
 	public void lock() {
 		locked = true;
-		drawDice(sideUp, locked);
 	}
 
 	/**
@@ -65,6 +87,5 @@ public class Dice {
 	 */
 	public void unlock() {
 		locked = false;
-		drawDice(sideUp, locked);
 	}
 }
