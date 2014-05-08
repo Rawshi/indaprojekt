@@ -25,6 +25,17 @@ public class Scoresheet extends JPanel {
     rules[5] = "Sixes";
     rules[6] = "Sum";
     rules[7] = "Bonus";
+    rules[8] = "1 pair";
+    rules[9] = "2 pair";
+    rules[10] = "3 of a kind";
+    rules[11] = "4 of a kind";
+    rules[12] = "Small Straight";
+    rules[13] = "Large Straight";
+    rules[14] = "Full House";
+    rules[15] = "Chance";
+    rules[16] = "Yatzy";
+    rules[17] = "Total";
+    	
 	
 	/**
 	 * Constructor for Score sheet
