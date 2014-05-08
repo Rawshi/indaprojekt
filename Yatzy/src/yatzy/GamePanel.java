@@ -18,19 +18,21 @@ import javax.swing.JPanel;
 public class GamePanel extends JPanel {
 	
 	JButton rollButton;
-	GridBagConstraints con;
+	GridBagConstraints c;
 	Dice[] dices;
 	
 	public GamePanel() {
 		setLayout(new GridBagLayout());
 		setBorder(BorderFactory.createLineBorder(Color.black));
 		rollButton = new JButton("Roll");
-		con = new GridBagConstraints();	
+		c = new GridBagConstraints();	
 		dices = new Dice[5];
 
 		for(int i = 0; i < 5; i++){
 			dices[i] = new Dice();
-			add(dices[i].addDice());
+			c.gridx = 0;
+			c.gridy = i;
+			add(dices[i].addDice(), c);
 	
 		}
 		
