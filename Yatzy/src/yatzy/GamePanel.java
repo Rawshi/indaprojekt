@@ -22,9 +22,9 @@ public class GamePanel extends JPanel {
 	public GamePanel() {
      setBorder(BorderFactory.createLineBorder(Color.black));
 	 GridBagConstraints c = new GridBagConstraints();	
-	 Dice[] dices = new Dice[6];
+	 Dice[] dices = new Dice[5];
 	 
-	 for(int i = 0; i < 6; i++){
+	 for(int i = 0; i < 5; i++){
      dices[i] = new Dice();
 	 add(dices[i].addDice());
 	 }

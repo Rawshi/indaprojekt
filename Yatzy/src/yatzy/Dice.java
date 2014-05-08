@@ -25,7 +25,7 @@ public class Dice {
 	private int sideUp;
 	 ImageIcon[] diceImage = new ImageIcon[6];
 	 ImageIcon[] diceLockedImage = new ImageIcon[6];
-
+	 JToggleButton dice = new JToggleButton();
 
 	/**
 	 * Constructor for Dice
@@ -47,7 +47,6 @@ public class Dice {
 	 * Draws the dice
 	 */
 	public JToggleButton addDice() {
-		final JToggleButton dice = new JToggleButton();
 		dice.setIcon(diceImage[1]);
 		Border emptyBorder = BorderFactory.createEmptyBorder();
     	dice.setBorder(emptyBorder);
@@ -72,6 +71,7 @@ public class Dice {
 		if(!locked) {
 			//roll
 			sideUp = randomGen.nextInt(SIDES)+1;
+			dice.setIcon(diceImage[sideUp]);
 		}
 	}
 
