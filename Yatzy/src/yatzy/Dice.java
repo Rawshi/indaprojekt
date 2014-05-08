@@ -33,7 +33,7 @@ public class Dice {
 	public Dice() {
 		locked = false;
 		randomGen = new Random();
-		sideUp = 1;
+		sideUp = 0;
 		for (int i = 0; i< 6; i++){
 			Image image= Toolkit.getDefaultToolkit().getImage("resources/dice_"+i+".jpg");
 			diceImage[i] = new ImageIcon(image);
@@ -47,7 +47,7 @@ public class Dice {
 	 * Draws the dice
 	 */
 	public JToggleButton addDice() {
-		dice.setIcon(diceImage[1]);
+		dice.setIcon(diceImage[0]);
 		Border emptyBorder = BorderFactory.createEmptyBorder();
 		dice.setBorder(emptyBorder);
 		dice.addItemListener(new ItemListener() {
@@ -70,7 +70,7 @@ public class Dice {
 	public void roll() {
 		if(!locked) {
 			//roll
-			sideUp = randomGen.nextInt(SIDES)+1;
+			sideUp = randomGen.nextInt(SIDES);
 			dice.setIcon(diceImage[sideUp]);
 		}
 	}
