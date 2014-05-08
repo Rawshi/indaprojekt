@@ -16,7 +16,16 @@ public class Scoresheet extends JPanel {
 	int players;
 	private int columns;
 	private static final int ROWS = 19;
-
+	public String[] rules = new String[19];
+    rules[0] = "Ones";
+    rules[1] = "Twos";
+    rules[2] = "Threes";
+    rules[3] = "Fours";
+    rules[4] = "Fives";
+    rules[5] = "Sixes";
+    rules[6] = "Sum";
+    rules[7] = "Bonus";
+	
 	/**
 	 * Constructor for Score sheet
 	 */
