@@ -3,17 +3,12 @@ package yatzy;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.JToggleButton;
-import javax.swing.border.Border;
 
 /**
  * A Backround panel where every 
@@ -36,8 +31,18 @@ public class GamePanel extends JPanel {
 		for(int i = 0; i < 5; i++){
 			dices[i] = new Dice();
 			add(dices[i].addDice());
+	
 		}
-
+		
+        rollButton.addActionListener(new ActionListener(){
+        	public void actionPerformed(ActionEvent e){
+        	for(int i = 0; i < 5; i++){
+    			dices[i].roll();
+    	
+    		}
+        	}
+		});
+        add(rollButton);
 	}
 
 
