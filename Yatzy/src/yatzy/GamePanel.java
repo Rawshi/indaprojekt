@@ -21,7 +21,7 @@ public class GamePanel extends JPanel {
 	private GridBagConstraints c;
 	private Dice[] dices;
 	private int rollCount;
-
+	
 	public GamePanel() {
 		setLayout(new GridBagLayout());
 		setBorder(BorderFactory.createLineBorder(Color.black));
