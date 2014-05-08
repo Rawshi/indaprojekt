@@ -25,7 +25,7 @@ public class Game {
 		JOptionPane.showInputDialog("Derp");
 		JFrame gameField = new JFrame("Yatzy");
 		JPanel gameBorder = new JPanel();
-		JPanel gameBorder2 = new JPanel();
+		Scoresheet gameBorder2 = new Scoresheet();
 		GamePanel gameBackground = new GamePanel();
 
 		gameField.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

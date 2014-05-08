@@ -1,12 +1,19 @@
 package yatzy;
+
+import java.awt.GridLayout;
+
+import javax.swing.JButton;
+import javax.swing.JPanel;
+
 /**
  * Class Scoresheet - Constructs the score sheet, etc.
  * 
  * @author Kashmir Klingestedt & Edvard Mickos
  * @version 1.0
  */
-public class Scoresheet {
+public class Scoresheet extends JPanel {
 
+	
 	private static final int COLUMNS = 7;
 	private static final int ROWS = 19;
 
@@ -14,7 +21,11 @@ public class Scoresheet {
 	 * Constructor for Score sheet
 	 */
 	public Scoresheet() {
+		setLayout(new GridLayout());
+		JButton test = new JButton("blab");
+		add(test);
 		drawSheet(COLUMNS, ROWS);
+		
 	}
 
 	/**
