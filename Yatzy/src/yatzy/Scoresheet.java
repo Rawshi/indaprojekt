@@ -1,6 +1,8 @@
 package yatzy;
 
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -16,6 +18,7 @@ public class Scoresheet extends JPanel {
 	int players;
 	private int columns;
 	private static final int ROWS = 19;
+	currentPlayer int=1;
 	public String[] rules = new String[19]; {
     rules[1] = "Ones";
     rules[2] = "Twos";
@@ -43,13 +46,20 @@ public class Scoresheet extends JPanel {
 	public Scoresheet(int players) {
 		columns=players+1;
 		setLayout(new GridLayout(ROWS, columns));
+		
 		for (int i=0; i<ROWS; i++){
-		JButton test = new JButton(rules[i]);
-		add(test);
+		JButton b = new JButton(rules[i]);
+		b.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				addScore(i)
+					}
 		}
-		this.players = players;
 		
 	}
+		
+    public void addScore(int row){
+    	
+    }
 
 	/**
 	 * Draws the score sheet
@@ -57,8 +67,8 @@ public class Scoresheet extends JPanel {
 	 * @param columns Amount of columns
 	 * @param rows Amount of rows
 	 */
-	public void drawSheet(int columns, int rows) {
-
+	public void drawSheet(int row) {
+      
 	}
 
 	/**
