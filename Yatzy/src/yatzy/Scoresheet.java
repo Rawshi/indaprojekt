@@ -13,17 +13,18 @@ import javax.swing.JPanel;
  */
 public class Scoresheet extends JPanel {
 
-	
+	int players;
 	private static final int COLUMNS = 7;
 	private static final int ROWS = 19;
 
 	/**
 	 * Constructor for Score sheet
 	 */
-	public Scoresheet() {
+	public Scoresheet(int players) {
 		setLayout(new GridLayout());
 		JButton test = new JButton("blab");
 		add(test);
+		this.players = players;
 		drawSheet(COLUMNS, ROWS);
 		
 	}
