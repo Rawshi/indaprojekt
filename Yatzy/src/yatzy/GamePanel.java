@@ -16,11 +16,11 @@ import javax.swing.JPanel;
  *
  */
 public class GamePanel extends JPanel {
-	
+
 	JButton rollButton;
 	GridBagConstraints c;
 	Dice[] dices;
-	
+
 	public GamePanel() {
 		setLayout(new GridBagLayout());
 		setBorder(BorderFactory.createLineBorder(Color.black));
@@ -33,18 +33,22 @@ public class GamePanel extends JPanel {
 			c.gridx = 0;
 			c.gridy = i;
 			add(dices[i].addDice(), c);
-	
+
 		}
-		
-        rollButton.addActionListener(new ActionListener(){
-        	public void actionPerformed(ActionEvent e){
-        	for(int i = 0; i < 5; i++){
-    			dices[i].roll();
-    	
-    		}
-        	}
+
+		rollButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				for(int i = 0; i < 5; i++){
+					dices[i].roll();
+
+				}
+			}
 		});
-        add(rollButton);
+		c.gridx = 1;
+		c.gridy = 2;
+		c.ipadx = 40;
+		c.ipady = 20;
+		add(rollButton, c);
 	}
 
 
