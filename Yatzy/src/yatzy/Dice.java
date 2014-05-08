@@ -34,7 +34,7 @@ public class Dice {
 		locked = false;
 		randomGen = new Random();
 		sideUp = 1;
-		for (int i = 1; i< 7; i++){
+		for (int i = 0; i< 6; i++){
 			Image image= Toolkit.getDefaultToolkit().getImage("resources/dice_"+i+".jpg");
 			diceImage[i] = new ImageIcon(image);
 			// PlaceHolder för nya bilder
