@@ -17,9 +17,10 @@ import javax.swing.JPanel;
  */
 public class GamePanel extends JPanel {
 
-	JButton rollButton;
-	GridBagConstraints c;
-	Dice[] dices;
+	private JButton rollButton;
+	private GridBagConstraints c;
+	private Dice[] dices;
+	private int rollCount;
 
 	public GamePanel() {
 		setLayout(new GridBagLayout());
@@ -27,6 +28,7 @@ public class GamePanel extends JPanel {
 		rollButton = new JButton("Roll");
 		c = new GridBagConstraints();	
 		dices = new Dice[5];
+		rollCount = 0;
 
 		for(int i = 0; i < 5; i++){
 			dices[i] = new Dice();
@@ -38,10 +40,15 @@ public class GamePanel extends JPanel {
 
 		rollButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				for(int i = 0; i < 5; i++){
-					dices[i].roll();
-
+				if(rollCount == 3) {
+					rollButton.setEnabled(false);
+				} else {
+					for(int i = 0; i < 5; i++){
+						dices[i].roll();
+					}
+					rollCount++;
 				}
+
 			}
 		});
 		c.gridx = 1;
@@ -51,6 +58,10 @@ public class GamePanel extends JPanel {
 		add(rollButton, c);
 	}
 
+	public void resetRoll() {
+		rollCount = 0;
+		rollButton.setEnabled(true);
+	}
 
 	/**
 	 * Kommer antagligen inte att behövas.
