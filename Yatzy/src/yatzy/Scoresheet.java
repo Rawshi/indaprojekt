@@ -9,14 +9,14 @@ public class Scoresheet {
 
 	private static final int COLUMNS = 7;
 	private static final int ROWS = 19;
-	
+
 	/**
 	 * Constructor for Score sheet
 	 */
 	public Scoresheet() {
 		drawSheet(COLUMNS, ROWS);
 	}
-	
+
 	/**
 	 * Draws the score sheet
 	 * 
@@ -24,13 +24,13 @@ public class Scoresheet {
 	 * @param rows Amount of rows
 	 */
 	public void drawSheet(int columns, int rows) {
-		
+
 	}
-	
+
 	/**
 	 * Checks the values of the dices to figure out where it is allowed to put the score.
 	 */
 	public void clickScore() {
-		
+
 	}
 }

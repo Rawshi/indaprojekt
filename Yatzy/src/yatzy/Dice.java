@@ -23,9 +23,9 @@ public class Dice {
 	private boolean locked;
 	private Random randomGen;
 	private int sideUp;
-	 ImageIcon[] diceImage = new ImageIcon[6];
-	 ImageIcon[] diceLockedImage = new ImageIcon[6];
-	 JToggleButton dice = new JToggleButton();
+	ImageIcon[] diceImage = new ImageIcon[6];
+	ImageIcon[] diceLockedImage = new ImageIcon[6];
+	JToggleButton dice = new JToggleButton();
 
 	/**
 	 * Constructor for Dice
@@ -34,13 +34,13 @@ public class Dice {
 		locked = false;
 		randomGen = new Random();
 		sideUp = 1;
-		for (int i = 0; i< 6; i++){
+		for (int i = 1; i< 7; i++){
 			Image image= Toolkit.getDefaultToolkit().getImage("resources/dice_"+i+".jpg");
 			diceImage[i] = new ImageIcon(image);
 			// PlaceHolder för nya bilder
 			image= Toolkit.getDefaultToolkit().getImage("resources/dice_"+ (6-i) +".jpg");
 			diceLockedImage[i] = new ImageIcon(image);
-			}
+		}
 	}
 
 	/**
@@ -49,18 +49,18 @@ public class Dice {
 	public JToggleButton addDice() {
 		dice.setIcon(diceImage[1]);
 		Border emptyBorder = BorderFactory.createEmptyBorder();
-    	dice.setBorder(emptyBorder);
+		dice.setBorder(emptyBorder);
 		dice.addItemListener(new ItemListener() {
-			   public void itemStateChanged(ItemEvent ev) {
-			      if(ev.getStateChange()==ItemEvent.SELECTED){
-			    	lock();
-			        dice.setIcon(diceLockedImage[sideUp]);
-			      } else if(ev.getStateChange()==ItemEvent.DESELECTED){
-			    	unlock();
-			        dice.setIcon(diceImage[sideUp]);
-			      }
-			   }
-		 });
+			public void itemStateChanged(ItemEvent ev) {
+				if(ev.getStateChange()==ItemEvent.SELECTED){
+					lock();
+					dice.setIcon(diceLockedImage[sideUp]);
+				} else if(ev.getStateChange()==ItemEvent.DESELECTED){
+					unlock();
+					dice.setIcon(diceImage[sideUp]);
+				}
+			}
+		});
 		return dice;
 	}
 
