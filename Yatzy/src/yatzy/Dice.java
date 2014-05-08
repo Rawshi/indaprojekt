@@ -87,4 +87,8 @@ public class Dice {
 	public void unlock() {
 		locked = false;
 	}
+	
+	public boolean rollCheck() {
+		return locked;
+	}
 }

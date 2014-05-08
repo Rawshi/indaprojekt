@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -40,6 +41,14 @@ public class GamePanel extends JPanel {
 
 		rollButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
+				if (rollCount == 0) {
+					for (int i=0; i < dices.length; i++){
+						if(dices[i].rollCheck()){
+							JOptionPane.showMessageDialog(null, "You can't roll while previous dice are locked");
+							return;
+						}
+					}
+				}
 				if(rollCount == 3) {
 					rollButton.setEnabled(false);
 					// vänta på scoresheet
