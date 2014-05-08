@@ -16,26 +16,26 @@ public class Scoresheet extends JPanel {
 	int players;
 	private int columns;
 	private static final int ROWS = 19;
-	public String[] rules = new String[19];
-    rules[0] = "Ones";
-    rules[1] = "Twos";
-    rules[2] = "Threes";
-    rules[3] = "Fours";
-    rules[4] = "Fives";
-    rules[5] = "Sixes";
-    rules[6] = "Sum";
-    rules[7] = "Bonus";
-    rules[8] = "1 pair";
-    rules[9] = "2 pair";
-    rules[10] = "3 of a kind";
-    rules[11] = "4 of a kind";
-    rules[12] = "Small Straight";
-    rules[13] = "Large Straight";
-    rules[14] = "Full House";
-    rules[15] = "Chance";
-    rules[16] = "Yatzy";
-    rules[17] = "Total";
-    	
+	public String[] rules = new String[19]; {
+    rules[1] = "Ones";
+    rules[2] = "Twos";
+    rules[3] = "Threes";
+    rules[4] = "Fours";
+    rules[5] = "Fives";
+    rules[6] = "Sixes";
+    rules[7] = "Sum";
+    rules[8] = "Bonus";
+    rules[9] = "1 pair";
+    rules[10] = "2 pair";
+    rules[11] = "3 of a kind";
+    rules[12] = "4 of a kind";
+    rules[13] = "Small Straight";
+    rules[14] = "Large Straight";
+    rules[15] = "Full House";
+    rules[16] = "Chance";
+    rules[17] = "Yatzy";
+    rules[18] = "Total";
+	}
 	
 	/**
 	 * Constructor for Score sheet
@@ -43,8 +43,8 @@ public class Scoresheet extends JPanel {
 	public Scoresheet(int players) {
 		columns=players+1;
 		setLayout(new GridLayout(ROWS, columns));
-		for (int i=0; i<columns*ROWS; i++){
-		JButton test = new JButton("blab");
+		for (int i=0; i<ROWS; i++){
+		JButton test = new JButton(rules[i]);
 		add(test);
 		}
 		this.players = players;
