@@ -23,10 +23,10 @@ public class Scoresheet extends JPanel {
 	public Scoresheet(int players) {
 		columns=players+1;
 		setLayout(new GridLayout(ROWS, columns));
+		for (int i=0; i<columns*ROWS; i++){
 		JButton test = new JButton("blab");
-		JButton test2 = new JButton("blab");
 		add(test);
-		add(test2);
+		}
 		this.players = players;
 		
 	}
