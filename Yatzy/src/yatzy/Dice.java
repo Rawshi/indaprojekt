@@ -38,7 +38,7 @@ public class Dice {
 			Image image= Toolkit.getDefaultToolkit().getImage("resources/dice_"+i+".jpg");
 			diceImage[i] = new ImageIcon(image);
 			// PlaceHolder för nya bilder
-			image= Toolkit.getDefaultToolkit().getImage("resources/dice_"+ (6-i) +".jpg");
+			image = Toolkit.getDefaultToolkit().getImage("resources/locked_dice_"+i+".jpg");
 			diceLockedImage[i] = new ImageIcon(image);
 		}
 	}
