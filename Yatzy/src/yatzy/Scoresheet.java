@@ -18,63 +18,48 @@ public class Scoresheet extends JPanel {
 	int players;
 	private int columns;
 	private static final int ROWS = 19;
-	currentPlayer int=1;
+	private int currentPlayer = 1;
 	public String[] rules = new String[19]; {
-    rules[1] = "Ones";
-    rules[2] = "Twos";
-    rules[3] = "Threes";
-    rules[4] = "Fours";
-    rules[5] = "Fives";
-    rules[6] = "Sixes";
-    rules[7] = "Sum";
-    rules[8] = "Bonus";
-    rules[9] = "1 pair";
-    rules[10] = "2 pair";
-    rules[11] = "3 of a kind";
-    rules[12] = "4 of a kind";
-    rules[13] = "Small Straight";
-    rules[14] = "Large Straight";
-    rules[15] = "Full House";
-    rules[16] = "Chance";
-    rules[17] = "Yatzy";
-    rules[18] = "Total";
+		rules[1] = "Ones";
+		rules[2] = "Twos";
+		rules[3] = "Threes";
+		rules[4] = "Fours";
+		rules[5] = "Fives";
+		rules[6] = "Sixes";
+		rules[7] = "Sum";
+		rules[8] = "Bonus";
+		rules[9] = "1 pair";
+		rules[10] = "2 pair";
+		rules[11] = "3 of a kind";
+		rules[12] = "4 of a kind";
+		rules[13] = "Small Straight";
+		rules[14] = "Large Straight";
+		rules[15] = "Full House";
+		rules[16] = "Chance";
+		rules[17] = "Yatzy";
+		rules[18] = "Total";
 	}
-	
+
 	/**
 	 * Constructor for Score sheet
 	 */
 	public Scoresheet(int players) {
 		columns=players+1;
 		setLayout(new GridLayout(ROWS, columns));
-		
+
 		for (int i=0; i<ROWS; i++){
-		JButton b = new JButton(rules[i]);
-		b.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				addScore(i)
-					}
+			JButton b = new JButton(rules[i]);
+			b.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent e){
+					addScore(i);
+				}
+			}
 		}
-		
-	}
-		
-    public void addScore(int row){
-    	
-    }
 
-	/**
-	 * Draws the score sheet
-	 * 
-	 * @param columns Amount of columns
-	 * @param rows Amount of rows
-	 */
-	public void drawSheet(int row) {
-      
-	}
+		/**
+		 * Checks the values of the dices to figure out where it is allowed to put the score.
+		 */
+		public void addScore(int row){
 
-	/**
-	 * Checks the values of the dices to figure out where it is allowed to put the score.
-	 */
-	public void clickScore() {
-
+		}
 	}
-}
