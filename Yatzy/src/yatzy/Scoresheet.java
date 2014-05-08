@@ -49,17 +49,142 @@ public class Scoresheet extends JPanel {
 
 		for (int i=0; i<ROWS; i++){
 			JButton b = new JButton(rules[i]);
-			b.addActionListener(new ActionListener(){
-				public void actionPerformed(ActionEvent e){
-					addScore(i);
-				}
-			}
+			addScore(b, i);
+			add(b);
+		 }
 		}
 
 		/**
 		 * Checks the values of the dices to figure out where it is allowed to put the score.
 		 */
-		public void addScore(int row){
-
+		public void addScore(JButton b, int row){
+	    switch (row) {
+         case 1:
+          b.addActionListener(new ActionListener(){
+		  public void actionPerformed(ActionEvent e){
+			  System.out.println("dix");
+		  }	
+		    });
+		  break;
+         case 2:
+        	 b.addActionListener(new ActionListener(){
+       		  public void actionPerformed(ActionEvent e){
+       			  System.out.println("nodix");
+       		  }	
+       		    });
+        	 break;
+         case 3:
+        	 b.addActionListener(new ActionListener(){
+       		  public void actionPerformed(ActionEvent e){
+       			  
+       		  }	
+       		    });
+        	 break;
+         case 4:
+        	 b.addActionListener(new ActionListener(){
+       		  public void actionPerformed(ActionEvent e){
+       			  
+       		  }	
+       		    });
+        	 break;
+         case 5:
+        	 b.addActionListener(new ActionListener(){
+       		  public void actionPerformed(ActionEvent e){
+       			  
+       		  }	
+       		    });
+        	 break;
+         case 6:
+        	 b.addActionListener(new ActionListener(){
+       		  public void actionPerformed(ActionEvent e){
+       			  
+       		  }	
+       		    });
+        	 break;
+         case 7:
+        	 b.addActionListener(new ActionListener(){
+       		  public void actionPerformed(ActionEvent e){
+       			  
+       		  }	
+       		    });
+        	 break;
+         case 8:
+        	 b.addActionListener(new ActionListener(){
+       		  public void actionPerformed(ActionEvent e){
+       			  
+       		  }	
+       		    });
+        	 break;
+         case 9:
+        	 b.addActionListener(new ActionListener(){
+       		  public void actionPerformed(ActionEvent e){
+       			  
+       		  }	
+       		    });
+        	 break;
+         case 10:
+        	 b.addActionListener(new ActionListener(){
+       		  public void actionPerformed(ActionEvent e){
+       			  
+       		  }	
+       		    });
+        	 break;
+         case 11:
+        	 b.addActionListener(new ActionListener(){
+       		  public void actionPerformed(ActionEvent e){
+       			  
+       		  }	
+       		    });
+        	 break;
+         case 12:
+        	 b.addActionListener(new ActionListener(){
+       		  public void actionPerformed(ActionEvent e){
+       			  
+       		  }	
+       		    });
+        	 break;
+         case 13:
+        	 b.addActionListener(new ActionListener(){
+       		  public void actionPerformed(ActionEvent e){
+       			  
+       		  }	
+       		    });
+        	 break;
+         case 14:
+        	 b.addActionListener(new ActionListener(){
+       		  public void actionPerformed(ActionEvent e){
+       			  
+       		  }	
+       		    });
+        	 break;
+         case 15:
+        	 b.addActionListener(new ActionListener(){
+       		  public void actionPerformed(ActionEvent e){
+       			  
+       		  }	
+       		    });
+        	 break;
+         case 16:
+        	 b.addActionListener(new ActionListener(){
+       		  public void actionPerformed(ActionEvent e){
+       			  
+       		  }	
+       		    });
+        	 break;
+         case 17:
+        	 b.addActionListener(new ActionListener(){
+       		  public void actionPerformed(ActionEvent e){
+       			  
+       		  }	
+       		    });
+        	 break;
+         case 18:
+        	 b.addActionListener(new ActionListener(){
+       		  public void actionPerformed(ActionEvent e){
+       			  
+       		  }	
+       		    });
+        	 break;
 		}
 	}
+}
