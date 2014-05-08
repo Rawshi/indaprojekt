@@ -42,6 +42,7 @@ public class GamePanel extends JPanel {
 			public void actionPerformed(ActionEvent e){
 				if(rollCount == 3) {
 					rollButton.setEnabled(false);
+					// vänta på scoresheet
 				} else {
 					for(int i = 0; i < 5; i++){
 						dices[i].roll();
@@ -61,6 +62,10 @@ public class GamePanel extends JPanel {
 	public void resetRoll() {
 		rollCount = 0;
 		rollButton.setEnabled(true);
+	}
+	
+	public int getRollCount() {
+		return rollCount;
 	}
 
 	/**
