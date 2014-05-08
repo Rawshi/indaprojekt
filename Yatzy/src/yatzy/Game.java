@@ -22,10 +22,10 @@ public class Game {
 
 
 	private static void createGameGUI(){
-		JOptionPane.showInputDialog("Derp");
+		int players = Integer.parseInt(JOptionPane.showInputDialog("Derp"));
 		JFrame gameField = new JFrame("Yatzy");
 		JPanel gameBorder = new JPanel();
-		Scoresheet gameBorder2 = new Scoresheet();
+		Scoresheet gameBorder2 = new Scoresheet(players);
 		GamePanel gameBackground = new GamePanel();
 
 		gameField.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
