@@ -1,6 +1,7 @@
 package yatzy;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -19,7 +20,6 @@ import javax.swing.JPanel;
 public class GamePanel extends JPanel {
 
 	private JButton rollButton;
-	private GridBagConstraints c;
 	private Dice[] dices;
 	private int rollCount;
 	
@@ -27,7 +27,7 @@ public class GamePanel extends JPanel {
 		setLayout(new GridBagLayout());
 		setBorder(BorderFactory.createLineBorder(Color.black));
 		rollButton = new JButton("Roll");
-		c = new GridBagConstraints();	
+		GridBagConstraints c = new GridBagConstraints();	
 		dices = new Dice[5];
 		rollCount = 0;
 
@@ -49,7 +49,11 @@ public class GamePanel extends JPanel {
 						}
 					}
 				}
-				if(rollCount == 3) {
+				if(rollCount == 2) {
+					for(int i = 0; i < 5; i++){
+						dices[i].roll();
+					}
+					rollCount++;
 					rollButton.setEnabled(false);
 					// vänta på scoresheet
 				} else {
@@ -75,6 +79,10 @@ public class GamePanel extends JPanel {
 	
 	public int getRollCount() {
 		return rollCount;
+	}
+	
+	public Dice[] getDice() {
+		return dices;
 	}
 
 	/**

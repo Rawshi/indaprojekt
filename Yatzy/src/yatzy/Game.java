@@ -24,21 +24,21 @@ public class Game {
 	private static void createGameGUI(){
 		int players = Integer.parseInt(JOptionPane.showInputDialog("Derp"));
 		JFrame gameField = new JFrame("Yatzy");
-		JPanel gameBorder = new JPanel();
-		Scoresheet gameBorder2 = new Scoresheet(players);
+		//JPanel gameBorder = new JPanel();
 		GamePanel gameBackground = new GamePanel();
-
+        Scoresheet gameBorder2 = new Scoresheet(players, gameBackground.getDice());
+        
 		gameField.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		gameField.setSize(850,600);
+		gameField.setSize(400+(40*players),600);
 
-		gameBorder.setBackground(Color.green);
+		//gameBorder.setBackground(Color.green);
 		gameBorder2.setBackground(Color.green);
 		gameBackground.setBackground(Color.white);
 
-		gameField.add(gameBorder, BorderLayout.WEST);
-		gameField.add(gameBorder2, BorderLayout.EAST);
-		gameField.add(gameBackground, BorderLayout.CENTER);
-
+		//gameField.add(gameBorder, BorderLayout.WEST);
+		gameField.add(gameBorder2, BorderLayout.CENTER);
+		gameField.add(gameBackground, BorderLayout.WEST);
+         
 
 		gameField.setVisible(true);
 		gameBackground.repaint();

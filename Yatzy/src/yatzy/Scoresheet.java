@@ -1,10 +1,15 @@
 package yatzy;
 
-import java.awt.GridLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -19,6 +24,7 @@ public class Scoresheet extends JPanel {
 	private int columns;
 	private static final int ROWS = 19;
 	private int currentPlayer = 1;
+	JLabel[][] results;
 	public String[] rules = new String[19]; {
 		rules[1] = "Ones";
 		rules[2] = "Twos";
@@ -43,15 +49,38 @@ public class Scoresheet extends JPanel {
 	/**
 	 * Constructor for Score sheet
 	 */
-	public Scoresheet(int players) {
+	public Scoresheet(int players, Dice[] dices) {
 		columns=players+1;
-		setLayout(new GridLayout(ROWS, columns));
-
-		for (int i=0; i<ROWS; i++){
-			JButton b = new JButton(rules[i]);
-			addScore(b, i);
-			add(b);
+		results = new JLabel[players][ROWS];
+		setLayout(new GridBagLayout());
+		GridBagConstraints grid = new GridBagConstraints();
+		for (int i=1; i<ROWS; i++){
+			JButton button = new JButton(rules[i]);
+			addScore(button, i);
+			grid.fill = GridBagConstraints.HORIZONTAL;
+			grid.gridx = 0;
+			grid.gridy = i;
+			add(button, grid);
 		 }
+		
+		for (int i=1; i<results.length; i++){
+			for( int j=1; j<results[0].length; j++){
+			JLabel l = new JLabel();
+			l.setMinimumSize(new Dimension(20,5));
+			l.setPreferredSize(new Dimension(20,5));
+			grid.fill = GridBagConstraints.HORIZONTAL;
+			l.setText("1505");
+			l.setOpaque(true);
+			l.setBackground(Color.white);
+			grid.insets = new Insets(0,10,10,0);
+			grid.gridx = i;
+			grid.gridy = j;
+			grid.ipadx = 20;
+			grid.ipady = 10;
+			results[i][j]=l;
+			add(l, grid);
+			}
+		}
 		}
 
 		/**
