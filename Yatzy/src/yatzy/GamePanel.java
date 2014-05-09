@@ -13,25 +13,27 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
- * A Backround panel where every 
+ * A Backround panel where the dice are placed
+ * 
  * @author Mig
- *
+ * 
  */
 public class GamePanel extends JPanel {
 
 	private JButton rollButton;
 	private Dice[] dices;
 	private int rollCount;
-	
+
 	public GamePanel() {
 		setLayout(new GridBagLayout());
+		setPreferredSize(new Dimension(200, 600));
 		setBorder(BorderFactory.createLineBorder(Color.black));
 		rollButton = new JButton("Roll");
-		GridBagConstraints c = new GridBagConstraints();	
+		GridBagConstraints c = new GridBagConstraints();
 		dices = new Dice[5];
 		rollCount = 0;
 
-		for(int i = 0; i < 5; i++){
+		for (int i = 0; i < 5; i++) {
 			dices[i] = new Dice();
 			c.gridx = 0;
 			c.gridy = i;
@@ -39,29 +41,26 @@ public class GamePanel extends JPanel {
 
 		}
 
-		rollButton.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
+		rollButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				if (rollCount == 0) {
-					for (int i=0; i < dices.length; i++){
-						if(dices[i].rollCheck()){
-							JOptionPane.showMessageDialog(null, "You can't roll while previous dice are locked");
+					for (int i = 0; i < dices.length; i++) {
+						if (dices[i].rollCheck()) {
+							JOptionPane
+									.showMessageDialog(null,
+											"You can't roll while previous dice are locked");
 							return;
 						}
 					}
 				}
-				if(rollCount == 2) {
-					for(int i = 0; i < 5; i++){
-						dices[i].roll();
-					}
+				if (rollCount == 2) {
+					rollAllDice();
 					rollCount++;
 					rollButton.setEnabled(false);
-					// vänta på scoresheet
 				} else {
-					for(int i = 0; i < 5; i++){
-						dices[i].roll();
-					}
-					rollCount++;
+					rollAllDice();
 				}
+				rollCount++;
 
 			}
 		});
@@ -75,26 +74,38 @@ public class GamePanel extends JPanel {
 	public void resetRoll() {
 		rollCount = 0;
 		rollButton.setEnabled(true);
+		for (int i = 0; i < 5; i++){
+         dices[i].unlock();
+         dices[i].setVisible(false);
+		}
 	}
-	
+
 	public int getRollCount() {
 		return rollCount;
 	}
-	
+
 	public Dice[] getDice() {
 		return dices;
+	}
+
+	private void rollAllDice() {
+		for (int i = 0; i < 5; i++) {
+			dices[i].roll();
+			dices[i].setVisible(true);
+		}
 	}
 
 	/**
 	 * Kommer antagligen inte att behövas.
 	 */
-	//	@Override
-	//	public void paintComponent(Graphics g){
-	//		super.paintComponent(g);
+	// @Override
+	// public void paintComponent(Graphics g){
+	// super.paintComponent(g);
 	//
-	//	   // Image dice1 = Toolkit.getDefaultToolkit().getImage("resources/dice_1.jpg");
-	//	    
-	//		// g.drawImage(dice1, 150, 10, this);
+	// // Image dice1 =
+	// Toolkit.getDefaultToolkit().getImage("resources/dice_1.jpg");
+	//
+	// // g.drawImage(dice1, 150, 10, this);
 	//
 
 }

@@ -21,7 +21,7 @@ public class Dice {
 
 	private static final int SIDES = 6;
 	private boolean locked;
-	private Random randomGen;
+	private boolean invisible;
 	private int sideUp;
 	ImageIcon[] diceImage = new ImageIcon[6];
 	ImageIcon[] diceLockedImage = new ImageIcon[6];
@@ -32,7 +32,6 @@ public class Dice {
 	 */
 	public Dice() {
 		locked = false;
-		randomGen = new Random();
 		sideUp = 0;
 		for (int i = 0; i< 6; i++){
 			Image image= Toolkit.getDefaultToolkit().getImage("resources/dice_"+i+".jpg");
@@ -53,13 +52,12 @@ public class Dice {
 			public void itemStateChanged(ItemEvent ev) {
 				if(ev.getStateChange()==ItemEvent.SELECTED){
 					lock();
-					dice.setIcon(diceLockedImage[sideUp]);
 				} else if(ev.getStateChange()==ItemEvent.DESELECTED){
 					unlock();
-					dice.setIcon(diceImage[sideUp]);
 				}
 			}
 		});
+		dice.setVisible(false);
 		return dice;
 	}
 
@@ -69,6 +67,7 @@ public class Dice {
 	public void roll() {
 		if(!locked) {
 			//roll
+			Random randomGen = new Random();
 			sideUp = randomGen.nextInt(SIDES);
 			dice.setIcon(diceImage[sideUp]);
 		}
@@ -79,6 +78,7 @@ public class Dice {
 	 */
 	public void lock() {
 		locked = true;
+		dice.setIcon(diceLockedImage[sideUp]);
 	}
 
 	/**
@@ -86,9 +86,20 @@ public class Dice {
 	 */
 	public void unlock() {
 		locked = false;
+		dice.setIcon(diceImage[sideUp]);
 	}
 	
 	public boolean rollCheck() {
 		return locked;
+	}
+	/**
+	 * returns the current side Up
+	 */
+	public int getSideUp() {
+		return sideUp; 
+	}
+	
+	public void setVisible(boolean isVisible){
+		dice.setVisible(isVisible);
 	}
 }

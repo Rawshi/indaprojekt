@@ -24,9 +24,10 @@ public class Game {
 	private static void createGameGUI(){
 		int players = Integer.parseInt(JOptionPane.showInputDialog("Derp"));
 		JFrame gameField = new JFrame("Yatzy");
+		gameField.setResizable(false);
 		//JPanel gameBorder = new JPanel();
 		GamePanel gameBackground = new GamePanel();
-        Scoresheet gameBorder2 = new Scoresheet(players, gameBackground.getDice());
+        Scoresheet gameBorder2 = new Scoresheet(players, gameBackground);
         
 		gameField.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		gameField.setSize(400+(40*players),600);
