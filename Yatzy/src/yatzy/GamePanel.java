@@ -83,8 +83,16 @@ public class GamePanel extends JPanel {
 		return rollCount;
 	}
 
-	public Dice[] getDice() {
-		return dices;
+	public int[] getDiceSides() {
+		    return new int[]{
+			dices[0].getSideUp(),
+			dices[1].getSideUp(),
+			dices[2].getSideUp(),
+			dices[3].getSideUp(),
+			dices[4].getSideUp(),
+		};
+			
+		
 	}
 
 	private void rollAllDice() {

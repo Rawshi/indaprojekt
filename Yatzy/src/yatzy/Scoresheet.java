@@ -26,7 +26,6 @@ public class Scoresheet extends JPanel {
 	private static final int ROWS = 19;
 	private int currentPlayer = 1;
 	JLabel[][] results;
-	Dice[] dices;
 	GamePanel gameBackground;
 	public String[] rules = new String[] {
 			"", // 0,0 empty square
@@ -41,7 +40,6 @@ public class Scoresheet extends JPanel {
 	public Scoresheet(int players, GamePanel panel) {
 		gameBackground = panel;
 		playerAmount = players - 1;
-		dices = panel.getDice();
 		results = new JLabel[players][ROWS];
 		setLayout(new GridBagLayout());
 		GridBagConstraints grid = new GridBagConstraints();
@@ -101,7 +99,6 @@ public class Scoresheet extends JPanel {
 				public void actionPerformed(ActionEvent e) {
 					int add = checkDice(1);
 					setText(currentPlayer, add, 1);
-					results[currentPlayer][1].setText(Integer.toString(add));
 					nextPlayer();
 				}
 			});
@@ -110,7 +107,7 @@ public class Scoresheet extends JPanel {
 			b.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					int add = checkDice(2);
-					results[currentPlayer][2].setText(Integer.toString(add));
+					setText(currentPlayer, add, 2);
 					nextPlayer();
 				}
 			});
@@ -119,7 +116,7 @@ public class Scoresheet extends JPanel {
 			b.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					int add = checkDice(3);
-					results[currentPlayer][3].setText(Integer.toString(add));
+					setText(currentPlayer, add, 3);
 					nextPlayer();
 				}
 			});
@@ -128,7 +125,7 @@ public class Scoresheet extends JPanel {
 			b.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					int add = checkDice(4);
-					results[currentPlayer][4].setText(Integer.toString(add));
+					setText(currentPlayer, add, 4);
 					nextPlayer();
 				}
 			});
@@ -137,7 +134,7 @@ public class Scoresheet extends JPanel {
 			b.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					int add = checkDice(5);
-					results[currentPlayer][5].setText(Integer.toString(add));
+					setText(currentPlayer, add, 5);
 					nextPlayer();
 				}
 			});
@@ -146,7 +143,7 @@ public class Scoresheet extends JPanel {
 			b.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					int add = checkDice(6);
-					results[currentPlayer][6].setText(Integer.toString(add));
+					setText(currentPlayer, add, 6);
 					nextPlayer();
 				}
 			});
@@ -247,14 +244,17 @@ public class Scoresheet extends JPanel {
 	 */
 	private int checkDice(int diceWant) {
 		int sum = 0;
+		int[] dices = gameBackground.getDiceSides();
 		for (int i = 0; i < dices.length; i++) {
-			int sideUp = (dices[i].getSideUp() + 1);
+			int sideUp = (dices[i] + 1);
 			if (sideUp == diceWant) {
 				sum += sideUp;
 			}
 		}
 		return sum;
 	}
+	
+	
 
 	/**
 	 * Checks if the current player is the laste one and resets if that is the
@@ -264,6 +264,7 @@ public class Scoresheet extends JPanel {
 		results[currentPlayer][0].setBackground(Color.white);
 		if (currentPlayer == playerAmount) {
 			currentPlayer = 1;
+			gameBackground.resetRoll();
 		} else {
 			currentPlayer++;
 			gameBackground.resetRoll();
@@ -272,11 +273,22 @@ public class Scoresheet extends JPanel {
 
 	}
 
+	/**
+	 * Sets the number @param add in the spot of the current player and dice-choice 
+	 * @param currentPlayer
+	 * @param add
+	 * @param diceChoice
+	 */
 	private void setText(int currentPlayer, int add, int diceChoice) {
 		results[currentPlayer][diceChoice]
 				.setHorizontalAlignment(SwingConstants.CENTER);
 		results[currentPlayer][diceChoice]
 				.setVerticalAlignment(SwingConstants.CENTER);
+		if(add==0){
+			results[currentPlayer][diceChoice].setText("-");
+		}
+		else{
 		results[currentPlayer][diceChoice].setText(Integer.toString(add));
+		}
 	}
 }
