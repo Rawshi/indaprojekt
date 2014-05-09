@@ -27,7 +27,6 @@ public class GamePanel extends JPanel {
 	public GamePanel() {
 		setLayout(new GridBagLayout());
 		setPreferredSize(new Dimension(200, 600));
-		setBorder(BorderFactory.createLineBorder(Color.black));
 		rollButton = new JButton("Roll");
 		GridBagConstraints c = new GridBagConstraints();
 		dices = new Dice[5];

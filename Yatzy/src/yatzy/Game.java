@@ -3,21 +3,20 @@ package yatzy;
 import java.awt.BorderLayout;
 import java.awt.Color;
 
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 public class Game {
+	
+	static Color gameColor = new Color(85, 140, 47);
 
 	public static void main(String args[]) {
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				createGameGUI();
+	      createGameGUI();
 
-			}
-		});
-
+ 
 	}
 
 
@@ -33,8 +32,10 @@ public class Game {
 		gameField.setSize(400+(40*players),600);
 
 		//gameBorder.setBackground(Color.green);
-		gameBorder2.setBackground(Color.green);
+		gameBorder2.setBackground(gameColor);
 		gameBackground.setBackground(Color.white);
+		gameBackground.
+		setBorder(BorderFactory.createLineBorder(gameColor, 7));
 
 		//gameField.add(gameBorder, BorderLayout.WEST);
 		gameField.add(gameBorder2, BorderLayout.CENTER);

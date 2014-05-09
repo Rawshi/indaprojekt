@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 /**
  * Class Scoresheet - Constructs the score sheet, etc.
@@ -27,27 +28,12 @@ public class Scoresheet extends JPanel {
 	JLabel[][] results;
 	Dice[] dices;
 	GamePanel gameBackground;
-	public String[] rules = new String[19];
-	{
-		rules[1] = "Ones";
-		rules[2] = "Twos";
-		rules[3] = "Threes";
-		rules[4] = "Fours";
-		rules[5] = "Fives";
-		rules[6] = "Sixes";
-		rules[7] = "Sum";
-		rules[8] = "Bonus";
-		rules[9] = "1 pair";
-		rules[10] = "2 pair";
-		rules[11] = "3 of a kind";
-		rules[12] = "4 of a kind";
-		rules[13] = "Small Straight";
-		rules[14] = "Large Straight";
-		rules[15] = "Full House";
-		rules[16] = "Chance";
-		rules[17] = "Yatzy";
-		rules[18] = "Total";
-	}
+	public String[] rules = new String[] {
+			"", // 0,0 empty square
+			"Ones", "Twos", "Threes", "Fours", "Fives", "Sixes", "Sum",
+			"Bonus", "1 pair", "2 pair", "3 of a kind", "4 of a kind",
+			"Small Straight", "Large Straight", "Full House", "Chance",
+			"Yatzy", "Total", };
 
 	/**
 	 * Constructor for Score sheet
@@ -82,7 +68,7 @@ public class Scoresheet extends JPanel {
 	 */
 	public void setupLabels(GridBagConstraints grid) {
 		for (int i = 1; i < results.length; i++) { // starts from 1 to skip 0,0
-			for (int j = 1; j < results[0].length; j++) {
+			for (int j = 0; j < results[0].length; j++) {
 				JLabel l = new JLabel();
 				l.setMinimumSize(new Dimension(20, 5));
 				l.setPreferredSize(new Dimension(20, 5));
@@ -96,6 +82,10 @@ public class Scoresheet extends JPanel {
 				grid.ipady = 10;
 				results[i][j] = l;
 				add(l, grid);
+				results[1][0].setBackground(Color.yellow); // Creates the square
+															// to tell which
+															// players turn it
+															// is.
 			}
 		}
 	}
@@ -110,6 +100,7 @@ public class Scoresheet extends JPanel {
 			b.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					int add = checkDice(1);
+					setText(currentPlayer, add, 1);
 					results[currentPlayer][1].setText(Integer.toString(add));
 					nextPlayer();
 				}
@@ -270,12 +261,22 @@ public class Scoresheet extends JPanel {
 	 * case.
 	 */
 	private void nextPlayer() {
+		results[currentPlayer][0].setBackground(Color.white);
 		if (currentPlayer == playerAmount) {
 			currentPlayer = 1;
-			return;
+		} else {
+			currentPlayer++;
+			gameBackground.resetRoll();
 		}
-		currentPlayer++;
-		gameBackground.resetRoll();
+		results[currentPlayer][0].setBackground(Color.yellow);
 
+	}
+
+	private void setText(int currentPlayer, int add, int diceChoice) {
+		results[currentPlayer][diceChoice]
+				.setHorizontalAlignment(SwingConstants.CENTER);
+		results[currentPlayer][diceChoice]
+				.setVerticalAlignment(SwingConstants.CENTER);
+		results[currentPlayer][diceChoice].setText(Integer.toString(add));
 	}
 }
