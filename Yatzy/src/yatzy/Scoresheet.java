@@ -26,7 +26,7 @@ public class Scoresheet extends JPanel {
 	private int columns;
 	private static final int ROWS = 19;
 	private int currentPlayer = 1;
-	private JButton[] scoreButtons = new JButton[ROWS]; //first button is empty
+	private JButton[] scoreButtons = new JButton[ROWS]; 
 	private ScoreSquare[][] results;
 	private GamePanel gameBackground;
 	private String[] rules = new String[] {
@@ -56,7 +56,7 @@ public class Scoresheet extends JPanel {
 			grid.fill = GridBagConstraints.HORIZONTAL;
 			grid.gridx = 0;
 			grid.gridy = i;
-			scoreButtons[i] = button; // first button is empty
+			scoreButtons[i] = button; 
 			add(button, grid);
 		}
 
@@ -116,19 +116,11 @@ public class Scoresheet extends JPanel {
 		case 6: //sixes
 			simpleDiceSide(b, row);
 			break;
-		case 7: //bonus
-			b.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-
-				}
-			});
+		case 7: //Sum
+			b.setEnabled(false);
 			break;
-		case 8: //
-			b.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-
-				}
-			});
+		case 8: //Bonus
+			b.setEnabled(false);
 			break;
 		case 9:
 			b.addActionListener(new ActionListener() {
@@ -239,6 +231,10 @@ public class Scoresheet extends JPanel {
 		}
 		results[currentPlayer][0].setBackground(Color.yellow);
 		for (int i=1; i<results[currentPlayer].length; i++){
+			 if(i==7 || i==8 || i==18){ // Sum Bonus and Total shoulc always be locked.
+				 scoreButtons[i].setEnabled(false);
+				 continue;
+			 }
 		    	scoreButtons[i].setEnabled(!results[currentPlayer][i].hasScore());
 		    
 		}
@@ -275,8 +271,17 @@ public class Scoresheet extends JPanel {
 				}
 				int add = checkDice(row);
 				setTextAndScore(add, row);
+				setSum();
 				nextPlayer();
 			}
 		});
+	}
+ 
+	private void setSum(){
+		int sum=0;
+		for (int i=1; i<=6;i++){
+			sum += results[currentPlayer][i].getScore();
+		}
+		setTextAndScore(sum, 7);
 	}
 }

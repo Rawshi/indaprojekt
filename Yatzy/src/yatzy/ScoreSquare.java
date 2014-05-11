@@ -4,7 +4,7 @@ import javax.swing.JLabel;
 
 public class ScoreSquare extends JLabel{
 
-	private boolean hasScore;
+	private boolean hasScore=false;
 	private int score;
 	
 	public ScoreSquare(){
