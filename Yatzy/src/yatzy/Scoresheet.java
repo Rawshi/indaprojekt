@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
@@ -25,7 +26,7 @@ public class Scoresheet extends JPanel {
 	private int columns;
 	private static final int ROWS = 19;
 	private int currentPlayer = 1;
-	JLabel[][] results;
+	ScoreSquare[][] results;
 	GamePanel gameBackground;
 	public String[] rules = new String[] {
 			"", // 0,0 empty square
@@ -40,7 +41,7 @@ public class Scoresheet extends JPanel {
 	public Scoresheet(int players, GamePanel panel) {
 		gameBackground = panel;
 		playerAmount = players - 1;
-		results = new JLabel[players][ROWS];
+		results = new ScoreSquare[players][ROWS];
 		setLayout(new GridBagLayout());
 		GridBagConstraints grid = new GridBagConstraints();
 		setupRuleButtons(grid);
@@ -67,7 +68,7 @@ public class Scoresheet extends JPanel {
 	public void setupLabels(GridBagConstraints grid) {
 		for (int i = 1; i < results.length; i++) { // starts from 1 to skip 0,0
 			for (int j = 0; j < results[0].length; j++) {
-				JLabel l = new JLabel();
+				ScoreSquare l = new ScoreSquare();
 				l.setMinimumSize(new Dimension(20, 5));
 				l.setPreferredSize(new Dimension(20, 5));
 				grid.fill = GridBagConstraints.HORIZONTAL;
@@ -80,12 +81,13 @@ public class Scoresheet extends JPanel {
 				grid.ipady = 10;
 				results[i][j] = l;
 				add(l, grid);
-				results[1][0].setBackground(Color.yellow); // Creates the square
-															// to tell which
-															// players turn it
-															// is.
 			}
 		}
+
+		results[1][0].setBackground(Color.yellow); // Creates the square
+													// to tell which
+													// players turn it
+													// is.
 	}
 
 	/**
@@ -94,68 +96,32 @@ public class Scoresheet extends JPanel {
 	 */
 	public void addScore(JButton b, final int row) {
 		switch (row) {
-		case 1:
-			b.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					int add = checkDice(1);
-					setText(currentPlayer, add, 1);
-					nextPlayer();
-				}
-			});
+		case 1: //ones
+			simpleDiceSide(b, row);
 			break;
-		case 2:
-			b.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					int add = checkDice(2);
-					setText(currentPlayer, add, 2);
-					nextPlayer();
-				}
-			});
+		case 2: //twos
+			simpleDiceSide(b, row);
 			break;
-		case 3:
-			b.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					int add = checkDice(3);
-					setText(currentPlayer, add, 3);
-					nextPlayer();
-				}
-			});
+		case 3: //threes
+			simpleDiceSide(b, row);
 			break;
-		case 4:
-			b.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					int add = checkDice(4);
-					setText(currentPlayer, add, 4);
-					nextPlayer();
-				}
-			});
+		case 4: //fours
+			simpleDiceSide(b, row);
 			break;
-		case 5:
-			b.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					int add = checkDice(5);
-					setText(currentPlayer, add, 5);
-					nextPlayer();
-				}
-			});
+		case 5: // fives
+			simpleDiceSide(b, row);
 			break;
-		case 6:
-			b.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					int add = checkDice(6);
-					setText(currentPlayer, add, 6);
-					nextPlayer();
-				}
-			});
+		case 6: //sixes
+			simpleDiceSide(b, row);
 			break;
-		case 7:
+		case 7: //bonus
 			b.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 
 				}
 			});
 			break;
-		case 8:
+		case 8: //
 			b.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 
@@ -279,16 +245,39 @@ public class Scoresheet extends JPanel {
 	 * @param add
 	 * @param diceChoice
 	 */
-	private void setText(int currentPlayer, int add, int diceChoice) {
+	private void setTextAndScore(int add, int diceChoice) {
 		results[currentPlayer][diceChoice]
 				.setHorizontalAlignment(SwingConstants.CENTER);
 		results[currentPlayer][diceChoice]
 				.setVerticalAlignment(SwingConstants.CENTER);
 		if(add==0){
 			results[currentPlayer][diceChoice].setText("-");
+			results[currentPlayer][diceChoice].setScore(0);
 		}
 		else{
 		results[currentPlayer][diceChoice].setText(Integer.toString(add));
+		results[currentPlayer][diceChoice].setScore(add);
 		}
+	}
+	
+	private boolean hasScoreCheck(int row){
+	if(results[currentPlayer][row].hasScore()){
+		JOptionPane.showMessageDialog(null, "Error: This Score has already been set");
+		return true;
+	}
+	return false;
+ }
+	
+	private void simpleDiceSide(JButton b, final int row){
+		b.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(hasScoreCheck(row)){
+					return;
+				}
+				int add = checkDice(row);
+				setTextAndScore(add, row);
+				nextPlayer();
+			}
+		});
 	}
 }
