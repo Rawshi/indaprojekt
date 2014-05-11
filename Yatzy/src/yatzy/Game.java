@@ -21,7 +21,7 @@ public class Game {
 
 
 	private static void createGameGUI(){
-		int players = Integer.parseInt(JOptionPane.showInputDialog("Derp"));
+		int players = Integer.parseInt(JOptionPane.showInputDialog("Derp"))+1; //amount of player + 1 button row
 		JFrame gameField = new JFrame("Yatzy");
 		gameField.setResizable(false);
 		//JPanel gameBorder = new JPanel();

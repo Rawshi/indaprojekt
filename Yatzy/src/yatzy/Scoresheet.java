@@ -7,9 +7,9 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -22,13 +22,14 @@ import javax.swing.SwingConstants;
  */
 public class Scoresheet extends JPanel {
 
-	int playerAmount;
+	private int playerAmount;
 	private int columns;
 	private static final int ROWS = 19;
 	private int currentPlayer = 1;
-	ScoreSquare[][] results;
-	GamePanel gameBackground;
-	public String[] rules = new String[] {
+	private JButton[] scoreButtons = new JButton[ROWS]; //first button is empty
+	private ScoreSquare[][] results;
+	private GamePanel gameBackground;
+	private String[] rules = new String[] {
 			"", // 0,0 empty square
 			"Ones", "Twos", "Threes", "Fours", "Fives", "Sixes", "Sum",
 			"Bonus", "1 pair", "2 pair", "3 of a kind", "4 of a kind",
@@ -55,6 +56,7 @@ public class Scoresheet extends JPanel {
 			grid.fill = GridBagConstraints.HORIZONTAL;
 			grid.gridx = 0;
 			grid.gridy = i;
+			scoreButtons[i] = button; // first button is empty
 			add(button, grid);
 		}
 
@@ -131,7 +133,7 @@ public class Scoresheet extends JPanel {
 		case 9:
 			b.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-
+					
 				}
 			});
 			break;
@@ -236,6 +238,10 @@ public class Scoresheet extends JPanel {
 			gameBackground.resetRoll();
 		}
 		results[currentPlayer][0].setBackground(Color.yellow);
+		for (int i=1; i<results[currentPlayer].length; i++){
+		    	scoreButtons[i].setEnabled(!results[currentPlayer][i].hasScore());
+		    
+		}
 
 	}
 
@@ -258,20 +264,13 @@ public class Scoresheet extends JPanel {
 		results[currentPlayer][diceChoice].setText(Integer.toString(add));
 		results[currentPlayer][diceChoice].setScore(add);
 		}
+		
 	}
-	
-	private boolean hasScoreCheck(int row){
-	if(results[currentPlayer][row].hasScore()){
-		JOptionPane.showMessageDialog(null, "Error: This Score has already been set");
-		return true;
-	}
-	return false;
- }
 	
 	private void simpleDiceSide(JButton b, final int row){
 		b.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(hasScoreCheck(row)){
+				if((gameBackground.getRollCount()==0)){
 					return;
 				}
 				int add = checkDice(row);

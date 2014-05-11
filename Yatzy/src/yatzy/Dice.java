@@ -70,6 +70,7 @@ public class Dice {
 			Random randomGen = new Random();
 			sideUp = randomGen.nextInt(SIDES);
 			dice.setIcon(diceImage[sideUp]);
+			dice.setSelected(false);
 		}
 	}
 
