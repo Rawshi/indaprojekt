@@ -71,6 +71,7 @@ public class Dice {
 			sideUp = randomGen.nextInt(SIDES);
 			dice.setIcon(diceImage[sideUp]);
 			dice.setSelected(false);
+			System.out.println(sideUp);
 		}
 	}
 

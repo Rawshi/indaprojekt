@@ -7,7 +7,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Arrays;
+import java.util.HashSet;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -26,7 +26,7 @@ public class Scoresheet extends JPanel {
 	private int columns;
 	private static final int ROWS = 19;
 	private int currentPlayer = 1;
-	private JButton[] scoreButtons = new JButton[ROWS]; 
+	private JButton[] scoreButtons = new JButton[ROWS];
 	private ScoreSquare[][] results;
 	private GamePanel gameBackground;
 	private String[] rules = new String[] {
@@ -56,7 +56,7 @@ public class Scoresheet extends JPanel {
 			grid.fill = GridBagConstraints.HORIZONTAL;
 			grid.gridx = 0;
 			grid.gridy = i;
-			scoreButtons[i] = button; 
+			scoreButtons[i] = button;
 			add(button, grid);
 		}
 
@@ -98,42 +98,77 @@ public class Scoresheet extends JPanel {
 	 */
 	public void addScore(JButton b, final int row) {
 		switch (row) {
-		case 1: //ones
+		case 1: // ones
 			simpleDiceSide(b, row);
 			break;
-		case 2: //twos
+		case 2: // twos
 			simpleDiceSide(b, row);
 			break;
-		case 3: //threes
+		case 3: // threes
 			simpleDiceSide(b, row);
 			break;
-		case 4: //fours
+		case 4: // fours
 			simpleDiceSide(b, row);
 			break;
 		case 5: // fives
 			simpleDiceSide(b, row);
 			break;
-		case 6: //sixes
+		case 6: // sixes
 			simpleDiceSide(b, row);
 			break;
-		case 7: //Sum
+		case 7: // Sum
 			b.setEnabled(false);
 			break;
-		case 8: //Bonus
+		case 8: // Bonus
 			b.setEnabled(false);
 			break;
-		case 9:
+		case 9: // One Pair
 			b.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					
+					if ((gameBackground.getRollCount() == 0)) {
+						return;
+					}
+					HashSet<Integer> pair = pair();
+					if(pair.size()==2){
+					for(Integer i : pair){
+						int yesNo = JOptionPane.showConfirmDialog(null,
+								"Do you want to use the pair of " + (int)(i+1) + "'s", "Yatzhee",
+								JOptionPane.YES_NO_OPTION);
+						if(yesNo==0){
+							setTextAndScore(2*(i+1), row);
+							return;
+						}
+					}
+					}
+					else if(pair.size()==1){
+					for (Integer i : pair){
+						setTextAndScore(2*(i+1), row);
+						return;
+
+					}
+					}
+					setTextAndScore(0, row);
 				}
 			});
 			break;
-		case 10:
+		case 10: //Two Pairs
 			b.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-
-				}
+					if ((gameBackground.getRollCount() == 0)) {
+						return;
+					}
+					HashSet<Integer> pair = pair();
+					int add = 0;
+					if(pair.size()<2){
+						setTextAndScore(0, row);
+						nextPlayer();
+						return;
+					}
+					for(int i : pair){
+					  add+=i+1;
+						}
+					setTextAndScore(2*add, row);
+				}		
 			});
 			break;
 		case 11:
@@ -213,8 +248,6 @@ public class Scoresheet extends JPanel {
 		}
 		return sum;
 	}
-	
-	
 
 	/**
 	 * Checks if the current player is the laste one and resets if that is the
@@ -230,58 +263,111 @@ public class Scoresheet extends JPanel {
 			gameBackground.resetRoll();
 		}
 		results[currentPlayer][0].setBackground(Color.yellow);
-		for (int i=1; i<results[currentPlayer].length; i++){
-			 if(i==7 || i==8 || i==18){ // Sum Bonus and Total shoulc always be locked.
-				 scoreButtons[i].setEnabled(false);
-				 continue;
-			 }
-		    	scoreButtons[i].setEnabled(!results[currentPlayer][i].hasScore());
-		    
+		for (int i = 1; i < results[currentPlayer].length; i++) {
+			if (i == 7 || i == 8 || i == 18) { // Sum Bonus and Total shoulc
+												// always be locked.
+				scoreButtons[i].setEnabled(false);
+				continue;
+			}
+			scoreButtons[i].setEnabled(!results[currentPlayer][i].hasScore());
+
 		}
 
 	}
 
 	/**
-	 * Sets the number @param add in the spot of the current player and dice-choice 
+	 * Sets the number @param add in the spot of the current player and
+	 * dice-choice
+	 * 
 	 * @param currentPlayer
 	 * @param add
 	 * @param diceChoice
 	 */
-	private void setTextAndScore(int add, int diceChoice) {
+	private boolean setTextAndScore(int add, int diceChoice) {
+		if (add == 0) {
+			int yesNo = JOptionPane.showConfirmDialog(null,
+					"Do you want to set this options result to zero?", "Yatzhee",
+					JOptionPane.YES_NO_OPTION);
+			if (yesNo == 1 || yesNo == -1) {
+				return false;
+			}
+		}
 		results[currentPlayer][diceChoice]
 				.setHorizontalAlignment(SwingConstants.CENTER);
 		results[currentPlayer][diceChoice]
 				.setVerticalAlignment(SwingConstants.CENTER);
-		if(add==0){
+		if (add == 0) {
 			results[currentPlayer][diceChoice].setText("-");
 			results[currentPlayer][diceChoice].setScore(0);
+		} else {
+			results[currentPlayer][diceChoice].setText(Integer.toString(add));
+			results[currentPlayer][diceChoice].setScore(add);
 		}
-		else{
-		results[currentPlayer][diceChoice].setText(Integer.toString(add));
-		results[currentPlayer][diceChoice].setScore(add);
-		}
-		
+		setTotal();
+		setSum();
+		nextPlayer();
+		return true;
+
 	}
 	
-	private void simpleDiceSide(JButton b, final int row){
+	/**
+	 * for Passive effect of gameplay (like sum calculation)
+	 */
+	private void setTextNoGamePlay(int add, int diceChoice) {
+		results[currentPlayer][diceChoice]
+				.setHorizontalAlignment(SwingConstants.CENTER);
+		results[currentPlayer][diceChoice]
+				.setVerticalAlignment(SwingConstants.CENTER);
+		if (add == 0) {
+			results[currentPlayer][diceChoice].setText("-");
+			results[currentPlayer][diceChoice].setScore(0);
+		} else {
+			results[currentPlayer][diceChoice].setText(Integer.toString(add));
+			results[currentPlayer][diceChoice].setScore(add);
+		}
+	}
+
+	private void simpleDiceSide(JButton b, final int row) {
 		b.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if((gameBackground.getRollCount()==0)){
+				if ((gameBackground.getRollCount() == 0)) {
 					return;
 				}
 				int add = checkDice(row);
-				setTextAndScore(add, row);
-				setSum();
-				nextPlayer();
+				if (!setTextAndScore(add, row)) {
+					return;
+				}
 			}
 		});
 	}
- 
-	private void setSum(){
-		int sum=0;
-		for (int i=1; i<=6;i++){
+
+	private void setSum() {
+		int sum = 0;
+		for (int i = 1; i <= 6; i++) {
 			sum += results[currentPlayer][i].getScore();
 		}
-		setTextAndScore(sum, 7);
+		setTextNoGamePlay(sum, 7);
+	}
+	
+	private void setTotal() {
+		int total = 0;
+		for (int i = 1; i< results[currentPlayer].length; i++){
+			total += results[currentPlayer][i].getScore();
+		}
+		setTextNoGamePlay(total, 18);
+	}
+	
+	private HashSet<Integer> pair() {
+		HashSet<Integer> pair = new HashSet<Integer>();
+		int[] diceSide = gameBackground.getDiceSides();
+		for (int i = 0; i < 5; i++) {
+			for (int j = 4; i < j; j--) {
+				if (diceSide[i] == diceSide[j]) {
+					System.out.println("dix");
+					  pair.add(diceSide[i]);
+				}
+			}
+		}
+		return pair;
 	}
 }
