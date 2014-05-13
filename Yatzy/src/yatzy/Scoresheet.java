@@ -40,7 +40,7 @@ public class Scoresheet extends JPanel {
 			"Yatzy", "Total", };
 
 	/**
-	 * Constructor for Score sheet
+	 * Constructor for Scoresheet
 	 */
 	public Scoresheet(int players, GamePanel panel) {
 		turnCount = 0;
@@ -53,6 +53,11 @@ public class Scoresheet extends JPanel {
 		setupLabels(grid);
 	}
 
+	/**
+	 * Creates the score buttons for the score sheet.
+	 * 
+	 * @param grid
+	 */
 	public void setupRuleButtons(GridBagConstraints grid) {
 		for (int i = 1; i < ROWS; i++) { // starts from 1 to skip the empty 0,0
 			JButton button = new JButton(rules[i]);
@@ -63,7 +68,6 @@ public class Scoresheet extends JPanel {
 			scoreButtons[i] = button;
 			add(button, grid);
 		}
-
 	}
 
 	/**
@@ -91,9 +95,9 @@ public class Scoresheet extends JPanel {
 		}
 
 		results[1][0].setBackground(Color.yellow); // Creates the square
-													// to tell which
-													// players turn it
-													// is.
+		// to tell which
+		// player's turn it
+		// is.
 	}
 
 	/**
@@ -138,7 +142,7 @@ public class Scoresheet extends JPanel {
 							int yesNo = JOptionPane.showConfirmDialog(gameBackground,
 									"Do you want to use the pair of "
 											+ (int) (i + 1) + "'s", "Yatzhee",
-									JOptionPane.YES_NO_OPTION);
+											JOptionPane.YES_NO_OPTION);
 							if (yesNo == 0) {
 								setTextAndScore(2 * (i + 1), row);
 								return;
@@ -275,8 +279,8 @@ public class Scoresheet extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				Set<Integer> straight = new HashSet<>();
 				for (int i = from; i < to; i++) { // making a default example of
-													// one of
-													// the possible straights
+					// one of
+					// the possible straights
 					straight.add(i);
 				}
 				int[] diceSide = gameBackground.getDiceSides();
@@ -332,7 +336,7 @@ public class Scoresheet extends JPanel {
 		results[currentPlayer][0].setBackground(Color.yellow);
 		for (int i = 1; i < results[currentPlayer].length; i++) {
 			if (i == 7 || i == 8 || i == 18) { // Sum Bonus and Total should
-												// always be locked.
+				// always be locked.
 				scoreButtons[i].setEnabled(false);
 				continue;
 			}
@@ -414,6 +418,9 @@ public class Scoresheet extends JPanel {
 		});
 	}
 
+	/**
+	 * Sets the sum and checks if the player gets the bonus.
+	 */
 	private void setSum() {
 		int sum = 0;
 		for (int i = 1; i <= 6; i++) {
@@ -425,6 +432,9 @@ public class Scoresheet extends JPanel {
 		setTextNoGamePlay(sum, 7);
 	}
 
+	/**
+	 * Sets the total (all collected points for the player).
+	 */
 	private void setTotal() {
 		int total = 0;
 		for (int i = 1; i <= 6; i++) {
@@ -436,6 +446,11 @@ public class Scoresheet extends JPanel {
 		setTextNoGamePlay(total, 18);
 	}
 
+	/**
+	 * Checks if there is a pair.
+	 * 
+	 * @return A HashSet with the pair value (not doubled).
+	 */
 	private HashSet<Integer> pair() {
 		HashSet<Integer> pair = new HashSet<Integer>();
 		int[] diceSide = gameBackground.getDiceSides();
@@ -449,6 +464,9 @@ public class Scoresheet extends JPanel {
 		return pair;
 	}
 
+	/**
+	 * Checks who the winner is and ends the game.
+	 */
 	public void gameEnds() {
 		int winner = -1;
 		int largest = 0;
@@ -459,7 +477,7 @@ public class Scoresheet extends JPanel {
 			}
 		}
 		JOptionPane.showMessageDialog(null, "Congratulations player " + winner
-				+ " for winning with a score of " + largest);
+				+ " for winning with a score of " + largest + "!");
 		System.exit(0);
 
 	}

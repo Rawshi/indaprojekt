@@ -28,7 +28,8 @@ public class Dice {
 	JToggleButton dice = new JToggleButton();
 
 	/**
-	 * Constructor for Dice
+	 * Constructor for Dice.
+	 * Puts the dice images (locked/unlocked) into separate arrays.
 	 */
 	public Dice() {
 		locked = false;
@@ -89,17 +90,22 @@ public class Dice {
 		locked = false;
 		dice.setIcon(diceImage[sideUp]);
 	}
-	
+
+	/**
+	 * Checks if the dice is locked or not.
+	 * @return True if the dice is locked, false if the dice is not locked.
+	 */
 	public boolean rollCheck() {
 		return locked;
 	}
+
 	/**
 	 * returns the current side Up
 	 */
 	public int getSideUp() {
 		return sideUp; 
 	}
-	
+
 	public void setVisible(boolean isVisible){
 		dice.setVisible(isVisible);
 	}

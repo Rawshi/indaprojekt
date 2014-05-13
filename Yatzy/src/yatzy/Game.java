@@ -15,7 +15,6 @@ public class Game {
 
 	public static void main(String args[]) {
 		createGameGUI();
-
 	}
 
 	private static void createGameGUI() {
@@ -27,10 +26,10 @@ public class Game {
 				null, options, options[2]);
 
 		if (players > 1) {
-			players = Integer
-					.parseInt(JOptionPane.showInputDialog("How many?"));
-			players -=1; // to work toghether with all the other buttons. 
+			players = Integer.parseInt(JOptionPane.showInputDialog("How many?"));
+			players -= 1; // to work together with all the other buttons. 
 		}
+		
 		System.out.println(players);
 		JFrame gameField = new JFrame("Yatzy");
 		gameField.setResizable(false);
@@ -52,6 +51,5 @@ public class Game {
 
 		gameField.setVisible(true);
 		gameBackground.repaint();
-
 	}
 }
