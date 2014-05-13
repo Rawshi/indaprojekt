@@ -26,9 +26,10 @@ public class Game {
 				JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
 				null, options, options[2]);
 
-		if (players > 2) {
+		if (players > 1) {
 			players = Integer
 					.parseInt(JOptionPane.showInputDialog("How many?"));
+			players -=1; // to work toghether with all the other buttons. 
 		}
 		System.out.println(players);
 		JFrame gameField = new JFrame("Yatzy");
@@ -38,7 +39,7 @@ public class Game {
 		Scoresheet gameBorder2 = new Scoresheet(players+2, gameBackground);
 
 		gameField.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		gameField.setSize(400 + (40 * players), 600);
+		gameField.setSize(400 + (40 * (players+2)), 600);
 
 		// gameBorder.setBackground(Color.green);
 		gameBorder2.setBackground(gameColor);
