@@ -352,7 +352,7 @@ public class Scoresheet extends JPanel {
 	 */
 	private boolean setTextAndScore(int add, int diceChoice) {
 		if (add == 0) {
-			int yesNo = JOptionPane.showConfirmDialog(null,
+			int yesNo = JOptionPane.showConfirmDialog(this,
 					"Do you want to set this options result to zero?", "Yatzy",
 					JOptionPane.YES_NO_OPTION);
 			if (yesNo == 1 || yesNo == -1) {
