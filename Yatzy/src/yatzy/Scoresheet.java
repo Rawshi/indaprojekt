@@ -135,7 +135,7 @@ public class Scoresheet extends JPanel {
 					HashSet<Integer> pair = pair();
 					if (pair.size() == 2) {
 						for (Integer i : pair) {
-							int yesNo = JOptionPane.showConfirmDialog(null,
+							int yesNo = JOptionPane.showConfirmDialog(gameBackground,
 									"Do you want to use the pair of "
 											+ (int) (i + 1) + "'s", "Yatzhee",
 									JOptionPane.YES_NO_OPTION);
@@ -352,7 +352,7 @@ public class Scoresheet extends JPanel {
 	 */
 	private boolean setTextAndScore(int add, int diceChoice) {
 		if (add == 0) {
-			int yesNo = JOptionPane.showConfirmDialog(this,
+			int yesNo = JOptionPane.showConfirmDialog(gameBackground,
 					"Do you want to set this options result to zero?", "Yatzy",
 					JOptionPane.YES_NO_OPTION);
 			if (yesNo == 1 || yesNo == -1) {
