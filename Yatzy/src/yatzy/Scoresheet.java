@@ -26,6 +26,7 @@ public class Scoresheet extends JPanel {
 
 	private int playerAmount;
 	private int columns;
+	private int turnCount;
 	private static final int ROWS = 19;
 	private int currentPlayer = 1;
 	private JButton[] scoreButtons = new JButton[ROWS];
@@ -42,6 +43,7 @@ public class Scoresheet extends JPanel {
 	 * Constructor for Score sheet
 	 */
 	public Scoresheet(int players, GamePanel panel) {
+		turnCount = 0;
 		gameBackground = panel;
 		playerAmount = players - 1;
 		results = new ScoreSquare[players][ROWS];
@@ -173,32 +175,20 @@ public class Scoresheet extends JPanel {
 			});
 			break;
 		case 11: // Three of a kind
-			b.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					checkOfAKind(row, 3, false);
-				}
-			});
+			checkOfAKind(b, row, 3, false);
+
 			break;
 		case 12: // Four of a kind
-			b.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					checkOfAKind(row, 4, false);
-				}
-			});
+			checkOfAKind(b, row, 4, false);
+
 			break;
 		case 13: // Small Straight
-			b.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					checkStraight(row, 15, 1, 5);
-				}
-			});
+			checkStraight(b, row, 15, 1, 5);
+
 			break;
 		case 14: // Large Straight
-			b.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					checkStraight(row, 20, 2, 6);
-				}
-			});
+			checkStraight(b, row, 20, 2, 6);
+
 			break;
 		case 15: // Full House
 			b.addActionListener(new ActionListener() {
@@ -211,7 +201,7 @@ public class Scoresheet extends JPanel {
 					if (dice.size() == 2) {
 						int sum = 0;
 						for (int i = 0; i < 5; i++) {
-							sum += diceSide[i];
+							sum += (diceSide[i] + 1);
 						}
 						setTextAndScore(sum, row);
 						return;
@@ -221,24 +211,20 @@ public class Scoresheet extends JPanel {
 				}
 			});
 			break;
-		case 16:
+		case 16: // Chance
 			b.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					int[] diceSide = gameBackground.getDiceSides();
 					int sum = 0;
 					for (int i = 0; i < diceSide.length; i++) {
-						sum += diceSide[i];
+						sum += (diceSide[i] + 1);
 					}
 					setTextAndScore(sum, row);
 				}
 			});
 			break;
-		case 17:
-			b.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					checkOfAKind(row, 5, true);
-				}
-			});
+		case 17: // Yatzy
+			checkOfAKind(b, row, 5, true);
 			break;
 		case 18:
 			b.setEnabled(false);
@@ -257,44 +243,54 @@ public class Scoresheet extends JPanel {
 	 * @param isYatzy
 	 *            if it is a yatzy-check to give proper score.
 	 */
-	private void checkOfAKind(int row, int whatKind, boolean isYatzy) {
-		int[] diceSide = gameBackground.getDiceSides();
-		for (int i = 0; i < 5; i++) {
-			int diceCount = 0;
-			for (int j = 4; i < j; j--) {
-				if (diceSide[i] == diceSide[j]) {
-					diceCount++;
-				}
-				if (diceCount >= whatKind - 1) {
-					if (isYatzy) {
-						setTextAndScore(50, row);
-						return;
+	private void checkOfAKind(JButton b, final int row, final int whatKind,
+			final boolean isYatzy) {
+		b.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int[] diceSide = gameBackground.getDiceSides();
+				for (int i = 0; i < 5; i++) {
+					int diceCount = 0;
+					for (int j = 4; i < j; j--) {
+						if (diceSide[i] == diceSide[j]) {
+							diceCount++;
+						}
+						if (diceCount >= whatKind - 1) {
+							if (isYatzy) {
+								setTextAndScore(50, row);
+								return;
+							}
+							setTextAndScore(whatKind * (diceSide[j] + 1), row);
+							return;
+						}
 					}
-					setTextAndScore(whatKind * (diceSide[j] + 1), row);
-					return;
 				}
+				setTextAndScore(0, row);
 			}
-		}
-		setTextAndScore(0, row);
+		});
 	}
 
-	private void checkStraight(int row, int score, int from, int to) {
-		Set<Integer> straight = new HashSet<>();
-		for (int i = from; i < to; i++) { // making a default example of one of
-											// the possible straights
-			straight.add(i);
-		}
-		int[] diceSide = gameBackground.getDiceSides();
-		HashSet<Integer> dice = new HashSet<Integer>();
-		for (int i = 0; i < 5; i++) {
-			dice.add(diceSide[i]);
-		}
-		if (dice.containsAll(straight)) {
-			setTextAndScore(30, row);
-			return;
-		}
-		setTextAndScore(0, row);
-
+	private void checkStraight(JButton b, final int row, int score,
+			final int from, final int to) {
+		b.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Set<Integer> straight = new HashSet<>();
+				for (int i = from; i < to; i++) { // making a default example of
+													// one of
+													// the possible straights
+					straight.add(i);
+				}
+				int[] diceSide = gameBackground.getDiceSides();
+				HashSet<Integer> dice = new HashSet<Integer>();
+				for (int i = 0; i < 5; i++) {
+					dice.add(diceSide[i]);
+				}
+				if (dice.containsAll(straight)) {
+					setTextAndScore(30, row);
+					return;
+				}
+				setTextAndScore(0, row);
+			}
+		});
 	}
 
 	/**
@@ -323,6 +319,10 @@ public class Scoresheet extends JPanel {
 	private void nextPlayer() {
 		results[currentPlayer][0].setBackground(Color.white);
 		if (currentPlayer == playerAmount) {
+			turnCount++;
+			if (turnCount > 14) {
+				gameEnds();
+			}
 			currentPlayer = 1;
 			gameBackground.resetRoll();
 		} else {
@@ -331,7 +331,7 @@ public class Scoresheet extends JPanel {
 		}
 		results[currentPlayer][0].setBackground(Color.yellow);
 		for (int i = 1; i < results[currentPlayer].length; i++) {
-			if (i == 7 || i == 8 || i == 18) { // Sum Bonus and Total shoulc
+			if (i == 7 || i == 8 || i == 18) { // Sum Bonus and Total should
 												// always be locked.
 				scoreButtons[i].setEnabled(false);
 				continue;
@@ -353,8 +353,8 @@ public class Scoresheet extends JPanel {
 	private boolean setTextAndScore(int add, int diceChoice) {
 		if (add == 0) {
 			int yesNo = JOptionPane.showConfirmDialog(null,
-					"Do you want to set this options result to zero?",
-					"Yatzhee", JOptionPane.YES_NO_OPTION);
+					"Do you want to set this options result to zero?", "Yatzy",
+					JOptionPane.YES_NO_OPTION);
 			if (yesNo == 1 || yesNo == -1) {
 				return false;
 			}
@@ -394,6 +394,12 @@ public class Scoresheet extends JPanel {
 		}
 	}
 
+	/**
+	 * The action of a button asking for a simple dice result
+	 * 
+	 * @param b
+	 * @param row
+	 */
 	private void simpleDiceSide(JButton b, final int row) {
 		b.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -413,12 +419,18 @@ public class Scoresheet extends JPanel {
 		for (int i = 1; i <= 6; i++) {
 			sum += results[currentPlayer][i].getScore();
 		}
+		if (sum > 63) {
+			setTextNoGamePlay(50, 8);
+		}
 		setTextNoGamePlay(sum, 7);
 	}
 
 	private void setTotal() {
 		int total = 0;
-		for (int i = 1; i < results[currentPlayer].length; i++) {
+		for (int i = 1; i <= 6; i++) {
+			total += results[currentPlayer][i].getScore();
+		}
+		for (int i = 8; i < results[currentPlayer].length - 1; i++) {
 			total += results[currentPlayer][i].getScore();
 		}
 		setTextNoGamePlay(total, 18);
@@ -435,5 +447,20 @@ public class Scoresheet extends JPanel {
 			}
 		}
 		return pair;
+	}
+
+	public void gameEnds() {
+		int winner = -1;
+		int largest = 0;
+		for (int i = 1; i < playerAmount + 2; i++) {
+			if (results[i][18].getScore() > largest) {
+				largest = results[i][18].getScore();
+				winner = i;
+			}
+		}
+		JOptionPane.showMessageDialog(null, "Congratulations player " + winner
+				+ " for winning with a score of " + largest);
+		System.exit(0);
+
 	}
 }
