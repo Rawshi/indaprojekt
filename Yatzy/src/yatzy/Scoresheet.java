@@ -302,7 +302,7 @@ public class Scoresheet extends JPanel {
 					dice.add(diceSide[i]);
 				}
 				if (dice.containsAll(straight)) {
-					setTextAndScore(30, row);
+					setTextAndScore(score, row);
 					return;
 				}
 				setTextAndScore(0, row);
