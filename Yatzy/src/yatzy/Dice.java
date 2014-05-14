@@ -4,8 +4,10 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.IOException;
 import java.util.Random;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JToggleButton;
@@ -35,10 +37,15 @@ public class Dice {
 		locked = false;
 		sideUp = 0;
 		for (int i = 0; i< 6; i++){
-			Image image= Toolkit.getDefaultToolkit().getImage("resources/dice_"+i+".jpg");
+			Image image;
+			try {
+			image = ImageIO.read(getClass().getResource("/Resources/dice_" +i+ ".jpg"));
 			diceImage[i] = new ImageIcon(image);
-			image = Toolkit.getDefaultToolkit().getImage("resources/locked_dice_"+i+".jpg");
+			image = ImageIO.read(getClass().getResource("/Resources/locked_dice_"+i+".jpg"));
 			diceLockedImage[i] = new ImageIcon(image);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
