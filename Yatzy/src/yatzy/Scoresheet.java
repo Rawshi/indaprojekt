@@ -139,10 +139,11 @@ public class Scoresheet extends JPanel {
 					HashSet<Integer> pair = pair();
 					if (pair.size() == 2) {
 						for (Integer i : pair) {
-							int yesNo = JOptionPane.showConfirmDialog(gameBackground,
+							int yesNo = JOptionPane.showConfirmDialog(
+									gameBackground,
 									"Do you want to use the pair of "
 											+ (int) (i + 1) + "'s", "Yatzhee",
-											JOptionPane.YES_NO_OPTION);
+									JOptionPane.YES_NO_OPTION);
 							if (yesNo == 0) {
 								setTextAndScore(2 * (i + 1), row);
 								return;
@@ -197,6 +198,9 @@ public class Scoresheet extends JPanel {
 		case 15: // Full House
 			b.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					if ((gameBackground.getRollCount() == 0)) {
+						return;
+					}
 					int[] diceSide = gameBackground.getDiceSides();
 					HashSet<Integer> dice = new HashSet<Integer>();
 					for (int i = 0; i < 5; i++) {
@@ -218,6 +222,9 @@ public class Scoresheet extends JPanel {
 		case 16: // Chance
 			b.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					if ((gameBackground.getRollCount() == 0)) {
+						return;
+					}
 					int[] diceSide = gameBackground.getDiceSides();
 					int sum = 0;
 					for (int i = 0; i < diceSide.length; i++) {
@@ -251,6 +258,9 @@ public class Scoresheet extends JPanel {
 			final boolean isYatzy) {
 		b.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if ((gameBackground.getRollCount() == 0)) {
+					return;
+				}
 				int[] diceSide = gameBackground.getDiceSides();
 				for (int i = 0; i < 5; i++) {
 					int diceCount = 0;
@@ -277,6 +287,9 @@ public class Scoresheet extends JPanel {
 			final int from, final int to) {
 		b.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if ((gameBackground.getRollCount() == 0)) {
+					return;
+				}
 				Set<Integer> straight = new HashSet<>();
 				for (int i = from; i < to; i++) { // making a default example of
 					// one of
