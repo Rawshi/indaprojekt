@@ -6,8 +6,6 @@ import java.awt.Color;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 
 public class Game {
 
@@ -29,23 +27,22 @@ public class Game {
 			players = Integer.parseInt(JOptionPane.showInputDialog("How many?"));
 			players -= 1; // to work together with all the other buttons. 
 		}
+		if (players < 0) {
+			System.exit(0);
+		}
 		
-		System.out.println(players);
 		JFrame gameField = new JFrame("Yatzy");
 		gameField.setResizable(false);
-		// JPanel gameBorder = new JPanel();
 		GamePanel gameBackground = new GamePanel();
 		Scoresheet gameBorder2 = new Scoresheet(players+2, gameBackground);
 
 		gameField.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		gameField.setSize(400 + (40 * (players+2)), 600);
 
-		// gameBorder.setBackground(Color.green);
 		gameBorder2.setBackground(gameColor);
 		gameBackground.setBackground(Color.white);
 		gameBackground.setBorder(BorderFactory.createLineBorder(gameColor, 7));
 
-		// gameField.add(gameBorder, BorderLayout.WEST);
 		gameField.add(gameBorder2, BorderLayout.CENTER);
 		gameField.add(gameBackground, BorderLayout.WEST);
 

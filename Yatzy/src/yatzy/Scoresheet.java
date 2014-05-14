@@ -7,7 +7,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -25,11 +24,10 @@ import javax.swing.SwingConstants;
 public class Scoresheet extends JPanel {
 
 	private int playerAmount;
-	private int columns;
 	private int turnCount;
 	private static final int ROWS = 19;
-	private int currentPlayer = 1;
-	private JButton[] scoreButtons = new JButton[ROWS];
+	private int currentPlayer;
+	private JButton[] scoreButtons;
 	private ScoreSquare[][] results;
 	private GamePanel gameBackground;
 	private String[] rules = new String[] {
@@ -43,10 +41,12 @@ public class Scoresheet extends JPanel {
 	 * Constructor for Scoresheet
 	 */
 	public Scoresheet(int players, GamePanel panel) {
+		currentPlayer = 1;
 		turnCount = 0;
 		gameBackground = panel;
 		playerAmount = players - 1;
 		results = new ScoreSquare[players][ROWS];
+		scoreButtons = new JButton[ROWS];
 		setLayout(new GridBagLayout());
 		GridBagConstraints grid = new GridBagConstraints();
 		setupRuleButtons(grid);
@@ -387,8 +387,8 @@ public class Scoresheet extends JPanel {
 			results[currentPlayer][diceChoice].setText(Integer.toString(add));
 			results[currentPlayer][diceChoice].setScore(add);
 		}
-		setTotal();
 		setSum();
+		setTotal();
 		nextPlayer();
 		return true;
 
@@ -450,10 +450,7 @@ public class Scoresheet extends JPanel {
 	 */
 	private void setTotal() {
 		int total = 0;
-		for (int i = 1; i <= 6; i++) {
-			total += results[currentPlayer][i].getScore();
-		}
-		for (int i = 8; i < results[currentPlayer].length - 1; i++) {
+		for (int i = 7; i < results[currentPlayer].length - 1; i++) {
 			total += results[currentPlayer][i].getScore();
 		}
 		setTextNoGamePlay(total, 18);

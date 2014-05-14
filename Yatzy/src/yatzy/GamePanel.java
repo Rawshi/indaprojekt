@@ -1,15 +1,12 @@
 package yatzy;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -46,17 +43,8 @@ public class GamePanel extends JPanel {
 
 		rollButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (rollCount == 0) {
-					for (Dice dice : dices) {
-						if (dice.rollCheck()) {
-							JOptionPane.showMessageDialog(null, "You can't roll while previous dice are locked");
-							return;
-						}
-					}
-				}
 				if (rollCount == 2) {
 					rollAllDice();
-					rollCount++;
 					rollButton.setEnabled(false);
 				} else {
 					rollAllDice();
@@ -115,18 +103,4 @@ public class GamePanel extends JPanel {
 			dice.setVisible(true);
 		}
 	}
-
-	/**
-	 * Kommer antagligen inte att behövas.
-	 */
-	// @Override
-	// public void paintComponent(Graphics g){
-	// super.paintComponent(g);
-	//
-	// // Image dice1 =
-	// Toolkit.getDefaultToolkit().getImage("resources/dice_1.jpg");
-	//
-	// // g.drawImage(dice1, 150, 10, this);
-	//
-
 }

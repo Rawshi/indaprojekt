@@ -1,7 +1,6 @@
 package yatzy;
 
 import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.IOException;
@@ -23,7 +22,6 @@ public class Dice {
 
 	private static final int SIDES = 6;
 	private boolean locked;
-	private boolean invisible;
 	private int sideUp;
 	ImageIcon[] diceImage = new ImageIcon[6];
 	ImageIcon[] diceLockedImage = new ImageIcon[6];
@@ -113,6 +111,9 @@ public class Dice {
 		return sideUp; 
 	}
 
+	/**
+	 * Makes the dice visible/invisible depending on the parameter.
+	 */
 	public void setVisible(boolean isVisible){
 		dice.setVisible(isVisible);
 	}
