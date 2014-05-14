@@ -283,7 +283,7 @@ public class Scoresheet extends JPanel {
 		});
 	}
 
-	private void checkStraight(JButton b, final int row, int score,
+	private void checkStraight(JButton b, final int row, final int score,
 			final int from, final int to) {
 		b.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
