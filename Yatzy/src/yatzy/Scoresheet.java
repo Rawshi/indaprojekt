@@ -4,12 +4,14 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -31,7 +33,7 @@ public class Scoresheet extends JPanel {
 	private ScoreSquare[][] results;
 	private GamePanel gameBackground;
 	private String[] rules = new String[] {
-			"", // 0,0 empty square
+			"Rules", // 0,0 empty square
 			"Ones", "Twos", "Threes", "Fours", "Fives", "Sixes", "Sum",
 			"Bonus", "1 pair", "2 pair", "3 of a kind", "4 of a kind",
 			"Small Straight", "Large Straight", "Full House", "Chance",
@@ -59,8 +61,16 @@ public class Scoresheet extends JPanel {
 	 * @param grid
 	 */
 	public void setupRuleButtons(GridBagConstraints grid) {
+		JButton button = new JButton(rules[0]);
+		add(button, grid);
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				addRules();
+			}
+		});
+
 		for (int i = 1; i < ROWS; i++) { // starts from 1 to skip the empty 0,0
-			JButton button = new JButton(rules[i]);
+			button = new JButton(rules[i]);
 			addScore(button, i);
 			grid.fill = GridBagConstraints.HORIZONTAL;
 			grid.gridx = 0;
@@ -83,7 +93,7 @@ public class Scoresheet extends JPanel {
 				l.setPreferredSize(new Dimension(20, 5));
 				grid.fill = GridBagConstraints.HORIZONTAL;
 				l.setOpaque(true);
-				l.setBackground(Color.white);
+				l.setBackground(Color.LIGHT_GRAY);
 				grid.insets = new Insets(0, 10, 10, 0);
 				grid.gridx = i;
 				grid.gridy = j;
@@ -93,12 +103,57 @@ public class Scoresheet extends JPanel {
 				add(l, grid);
 			}
 		}
-
-		results[1][0].setBackground(Color.yellow); // Creates the square
-		// to tell which
-		// player's turn it
-		// is.
+		addPlayerIndicator();
+		lightUpRow(1, Color.WHITE);
 	}
+
+	public void addPlayerIndicator() {
+		for(int i = 1; i < playerAmount+1; i++) {
+			results[i][0]
+					.setHorizontalAlignment(SwingConstants.CENTER);
+			results[i][0]
+					.setVerticalAlignment(SwingConstants.CENTER);
+			results[i][0].setText("p" + i);
+			results[i][0].setForeground(Color.WHITE);
+			results[i][0].setOpaque(false);
+		}
+	}
+
+	/**
+	 * 
+	 * @param row
+	 * @param color
+	 */
+	public void lightUpRow(int row, Color color){
+		for (int i=1;i < results[row].length; i++){
+			results[row][i].setBackground(color);
+		}
+	}
+
+	public void addRules(){
+		JOptionPane.showMessageDialog(this, 
+				"Rules: \n \n"
+						+ "Ones - amount of 1's \n"
+						+ "Twos - amount of 2's \n"
+						+ "Threes - amount of 3's \n"
+						+ "Fours - amount of 4's \n"
+						+ "Fives - amount of 5's \n"
+						+ "Sixes - amount of 6's \n"
+						+ "Sum - the sum of all above \n"
+						+ "Bonus - if you get a sum of 63 or more, \n you get a bonus of 50 points \n"
+						+ "1 pair - two dice show the same value \n"
+						+ "2 pair - two pairs of different values \n"
+						+ "3 of a kind - three dice show the same value \n"
+						+ "4 of a kind - four dice show the same value \n"
+						+ "Small Straight - the dice show 1-5 \n"
+						+ "Large Straight - the dice show 2-6 \n"
+						+ "Full House - a pair and 3 of a kind combined (different values) \n"
+						+ "Chance - can be used at any point, \n"
+						+ "sums up all dice \n"
+						+ "Yatzy - all five dice show the same value \n"
+						+ "Total - the total score so far");
+	}
+
 
 	/**
 	 * Checks the values of the dices to figure out where it is allowed to put
@@ -143,7 +198,7 @@ public class Scoresheet extends JPanel {
 									gameBackground,
 									"Do you want to use the pair of "
 											+ (int) (i + 1) + "'s", "Yatzhee",
-									JOptionPane.YES_NO_OPTION);
+											JOptionPane.YES_NO_OPTION);
 							if (yesNo == 0) {
 								setTextAndScore(2 * (i + 1), row);
 								return;
@@ -188,11 +243,11 @@ public class Scoresheet extends JPanel {
 
 			break;
 		case 13: // Small Straight
-			checkStraight(b, row, 15, 1, 5);
+			checkStraight(b, row, 15, 1, 6);
 
 			break;
 		case 14: // Large Straight
-			checkStraight(b, row, 20, 2, 6);
+			checkStraight(b, row, 20, 2, 7);
 
 			break;
 		case 15: // Full House
@@ -299,7 +354,7 @@ public class Scoresheet extends JPanel {
 				int[] diceSide = gameBackground.getDiceSides();
 				HashSet<Integer> dice = new HashSet<Integer>();
 				for (int i = 0; i < 5; i++) {
-					dice.add(diceSide[i]);
+					dice.add(diceSide[i]+1);
 				}
 				if (dice.containsAll(straight)) {
 					setTextAndScore(score, row);
@@ -334,7 +389,7 @@ public class Scoresheet extends JPanel {
 	 * case.
 	 */
 	private void nextPlayer() {
-		results[currentPlayer][0].setBackground(Color.white);
+		lightUpRow(currentPlayer, Color.LIGHT_GRAY);
 		if (currentPlayer == playerAmount) {
 			turnCount++;
 			if (turnCount > 14) {
@@ -346,7 +401,7 @@ public class Scoresheet extends JPanel {
 			currentPlayer++;
 			gameBackground.resetRoll();
 		}
-		results[currentPlayer][0].setBackground(Color.yellow);
+		lightUpRow(currentPlayer, Color.WHITE);
 		for (int i = 1; i < results[currentPlayer].length; i++) {
 			if (i == 7 || i == 8 || i == 18) { // Sum Bonus and Total should
 				// always be locked.
@@ -480,7 +535,7 @@ public class Scoresheet extends JPanel {
 	public void gameEnds() {
 		int winner = -1;
 		int largest = 0;
-		for (int i = 1; i < playerAmount + 2; i++) {
+		for (int i = 1; i < playerAmount + 1; i++) {
 			if (results[i][18].getScore() > largest) {
 				largest = results[i][18].getScore();
 				winner = i;
@@ -489,6 +544,5 @@ public class Scoresheet extends JPanel {
 		JOptionPane.showMessageDialog(null, "Congratulations player " + winner
 				+ " for winning with a score of " + largest + "!");
 		System.exit(0);
-
 	}
 }

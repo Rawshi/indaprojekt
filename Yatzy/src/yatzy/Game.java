@@ -7,9 +7,14 @@ import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+/**
+ * 
+ * @author 
+ *
+ */
 public class Game {
 
-	static Color gameColor = new Color(85, 140, 47);
+	static Color gameColor = new Color(44, 45, 92);
 
 	public static void main(String args[]) {
 		createGameGUI();
